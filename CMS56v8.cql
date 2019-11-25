@@ -49,13 +49,13 @@ define "Denominator":
 define "Dementia Diagnosis":
 	[Condition: "Severe dementia (disorder)"] Dementia
 		where Dementia.clinicalStatus.coding[0].code='active'
-			and Interval[(Dementia.onset as DateTime),(Dementia.abatement as DateTime)] overlaps "Measurement Period"
+			and Interval[ToDateTime(Dementia.onset),ToDateTime(Dementia.abatement)] overlaps "Measurement Period"
 
 define "Total Hip Arthroplasty with 2 or More Lower Body Fractures":
 	"Total Hip Arthroplasty Procedure" THAProcedure
 		where Count([Condition: "Fracture - Lower Body"] LowerBodyFracture
 				where LowerBodyFracture.clinicalStatus.coding[0].code='active'
-			    and Interval[(LowerBodyFracture.onset as DateTime),(LowerBodyFracture.abatement as DateTime)] starts less than 1 day on or before (THAProcedure.performed as Period)
+			    and Interval[ToDateTime(LowerBodyFracture.onset),ToDateTime(LowerBodyFracture.abatement)] starts less than 1 day on or before (THAProcedure.performed as Period)
 		)>= 2
 
 define "Denominator Exclusions":

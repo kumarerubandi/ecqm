@@ -126,7 +126,7 @@ define "Denominator Exclusions":
 	exists ( [Condition: "Diagnosis of hypertension"] Hypertension
 			with "Qualifying Encounters During Measurement Period" QualifyingEncounter
 				such that Hypertension.clinicalStatus.coding[0].code='active'
-					and Interval[(Hypertension.onset as DateTime),(Hypertension.abatement as DateTime)] starts before start of QualifyingEncounter.period
+					and Interval[ToDateTime(Hypertension.onset),ToDateTime(Hypertension.abatement)] starts before start of QualifyingEncounter.period
 	)
 
 define "Diagnostic Study Not Ordered Due to Patient Refusal":

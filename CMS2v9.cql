@@ -52,21 +52,21 @@ define "Has No Adult Depression Screening Due to Medical Reason":
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that (ScreeningNotPerfomedAdult.status='cancelled' or ScreeningNotPerfomedAdult.status='entered-in-error')
 					and ScreeningNotPerfomedAdult.dataAbsentReason in "Medical or Other reason not done"
-					and ScreeningNotPerfomedAdult.authorDatetime during QualifyingEncounter.period
+					and ScreepningNotPerfomedAdult.authorDatetime during QualifyingEncounter.period
 	)
 
 define "Has Diagnosis of Bipolar Starting Before Qualifying Encounter":
 	exists ( [Condition: "Bipolar Diagnosis"] DiagnosisBipolar
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that DiagnosisBipolar.clinicalStatus.coding[0].code = 'active'
-					and Interval[(DiagnosisBipolar.onset as DateTime),(DiagnosisBipolar.abatement as DateTime)] overlaps before QualifyingEncounter.period
+					and Interval[ToDateTime(DiagnosisBipolar.onset),ToDateTime(DiagnosisBipolar.abatement)] overlaps before QualifyingEncounter.period
 	)
 
 define "Has Diagnosis of Depression Starting Before Qualifying Encounter":
 	exists ( [Condition: "Depression diagnosis"] DiagnosisDepression
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that DiagnosisDepression.clinicalStatus.coding[0].code='active'
-					and Interval[(DiagnosisDepression.onset as DateTime),(DiagnosisDepression.abatement as DateTime)] overlaps before QualifyingEncounter.period
+					and Interval[ToDateTime(DiagnosisDepression.onset),ToDateTime(DiagnosisDepression.abatement)] overlaps before QualifyingEncounter.period
 	)
 
 define "Qualifying Encounter for Depression Screening":

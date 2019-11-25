@@ -40,7 +40,7 @@ define "Denominator":
 define "Numerator":
 	exists ( [Condition: "Dental Caries"] DentalCaries
 			where DentalCaries.clinicalStatus.coding[0].code='active'
-				and Interval[(DentalCaries.onset as DateTime),(DentalCaries.abatement as DateTime)] overlaps "Measurement Period"
+				and Interval[ToDateTime(DentalCaries.onset),ToDateTime(DentalCaries.abatement)] overlaps "Measurement Period"
 	)
 
 define "Denominator Exclusions":

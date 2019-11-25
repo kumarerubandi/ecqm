@@ -47,7 +47,7 @@ define "Qualifying Encounters":
 define "Congenital Absence of Cervix":
 	[Condition: "Congenital absence of cervix (disorder)"] NoCervixBirth
 		where NoCervixBirth.clinicalStatus.coding[0].code='active'
-			and Interval[(NoCervixBirth.onset as DateTime),(NoCervixBirth.abatement as DateTime)]  starts before end of "Measurement Period"
+			and Interval[ToDateTime(NoCervixBirth.onset),ToDateTime(NoCervixBirth.abatement)]  starts before end of "Measurement Period"
 
 define "Pap Test with Results":
 	[Observation: "Pap Test"] PapTestWithResult

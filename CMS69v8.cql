@@ -45,7 +45,7 @@ define "Denominator":
 define "Pregnancy During Measurement Period":
 	[Condition: "Pregnancy Dx"] Pregnancy
 		where Pregnancy.clinicalStatus.coding[0].code='active'
-				and Interval[(Pregnancy.onset as DateTime),(Pregnancy.abatement as DateTime)] overlaps "Measurement Period"
+				and Interval[ToDateTime(Pregnancy.onset),ToDateTime(Pregnancy.abatement)] overlaps "Measurement Period"
 
 define "Numerator":
 	"Has Normal BMI" is not null
