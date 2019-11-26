@@ -64,8 +64,8 @@ define "Has Hospice":
 
             exists ( [Encounter: "Encounter Inpatient"] DischargeHospice
             		where (DischargeHospice.status='in-progress' or DischargeHospice.status='finished')
-            		    and (( DischargeHospice.hospitalization.dischargeDisposition as Code ~ "Discharge to home for hospice care (procedure)"
-            				or DischargeHospice.hospitalization.dischargeDisposition as Code ~ "Discharge to healthcare facility for hospice care (procedure)")
+            		    and (( FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to home for hospice care (procedure)"
+            				or FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to healthcare facility for hospice care (procedure)")
             		        )
             			and DischargeHospice.period ends during "Measurement Period"
                 )

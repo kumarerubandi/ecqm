@@ -28,6 +28,8 @@ valueset "Encounter Inpatient":'2.16.840.1.113883.3.666.5.307'
 valueset "Hospice care ambulatory":'2.16.840.1.113762.1.4.1108.15'
 
 code "Congenital absence of cervix (disorder)": '37687000' from "SNOMEDCT" display 'Congenital absence of cervix (disorder)'
+code "Discharge to healthcare facility for hospice care (procedure)":'428371000124100' from "SNOMEDCT" display 'Discharge to healthcare facility for hospice care (procedure)'
+code "Discharge to home for hospice care (procedure)":'428361000124107' from "SNOMEDCT" display 'Discharge to home for hospice care (procedure)'
 
 parameter "Measurement Period" Interval<DateTime>
 
@@ -95,8 +97,8 @@ define "Has Hospice":
 
             exists ( [Encounter: "Encounter Inpatient"] DischargeHospice
             		where (DischargeHospice.status='in-progress' or DischargeHospice.status='finished')
-            		    and (( DischargeHospice.hospitalization.dischargeDisposition as Code ~ "Discharge to home for hospice care (procedure)"
-            				or DischargeHospice.hospitalization.dischargeDisposition as Code ~ "Discharge to healthcare facility for hospice care (procedure)")
+            		    and (( FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to home for hospice care (procedure)"
+            				or FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to healthcare facility for hospice care (procedure)")
             		        )
             			and DischargeHospice.period ends during "Measurement Period"
                 )

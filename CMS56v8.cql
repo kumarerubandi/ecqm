@@ -38,6 +38,8 @@ code "VR-12 Mental component summary (MCS) score - oblique method T-score": '720
 code "VR-12 Mental component summary (MCS) score - orthogonal method T-score": '72028-4' from "LOINC" display 'VR-12 Mental component summary (MCS) score - orthogonal method T-score'
 code "VR-12 Physical component summary (PCS) score - oblique method T-score": '72025-0' from "LOINC" display 'VR-12 Physical component summary (PCS) score - oblique method T-score'
 code "VR-12 Physical component summary (PCS) score - orthogonal method T-score": '72027-6' from "LOINC" display 'VR-12 Physical component summary (PCS) score - orthogonal method T-score'
+code "Discharge to healthcare facility for hospice care (procedure)":'428371000124100' from "SNOMEDCT" display 'Discharge to healthcare facility for hospice care (procedure)'
+code "Discharge to home for hospice care (procedure)":'428361000124107' from "SNOMEDCT" display 'Discharge to home for hospice care (procedure)'
 
 parameter "Measurement Period" Interval<DateTime>
 
@@ -55,7 +57,7 @@ define "Total Hip Arthroplasty with 2 or More Lower Body Fractures":
 	"Total Hip Arthroplasty Procedure" THAProcedure
 		where Count([Condition: "Fracture - Lower Body"] LowerBodyFracture
 				where LowerBodyFracture.clinicalStatus.coding[0].code='active'
-			    and Interval[FHIRHelpers.ToDateTime(LowerBodyFracture.onset),FHIRHelpers.ToDateTime(LowerBodyFracture.abatement)] starts less than 1 day on or before (THAProcedure.performed as Period)
+			    and Interval[FHIRHelpers.ToDateTime(LowerBodyFracture.onset),FHIRHelpers.ToDateTime(LowerBodyFracture.abatement)] starts 1 day or less before start of (THAProcedure.performed as Period)
 		)>= 2
 
 define "Denominator Exclusions":
@@ -73,19 +75,19 @@ define "HOOS Total Assessment Scores":
 	[Observation: "Quality of life score [HOOS]"] HOOSLifeQuality
 		with [Observation: "Sport-recreation score [HOOS]"] HOOSSport
 			such that (HOOSSport.status = 'final' or HOOSSport.status = 'amended' or HOOSSport.status = 'corrected')
-			and HOOSLifeQuality.authorDatetime same day as HOOSSport.authorDatetime
+			and start of (HOOSLifeQuality.effective as Period) same day as start of (HOOSSport.effective as Period)
 				and HOOSSport.value is not null
 		with [Observation: "Activities of daily living score [HOOS]"] HOOSActivityScore
 			such that (HOOSActivityScore.status = 'final' or HOOSActivityScore.status = 'amended' or HOOSActivityScore.status = 'corrected')
-			    and HOOSLifeQuality.authorDatetime same day as HOOSActivityScore.authorDatetime
+			    and start of (HOOSLifeQuality.effective as Period) same day as start of (HOOSActivityScore.effective as Period)
 				and HOOSActivityScore.value is not null
 		with [Observation: "Symptoms score [HOOS]"] HOOSSymptoms
 			such that (HOOSSymptoms.status = 'final' or HOOSSymptoms.status = 'amended' or HOOSSymptoms.status = 'corrected')
-			    and HOOSLifeQuality.authorDatetime same day as HOOSSymptoms.authorDatetime
+			    and start of (HOOSLifeQuality.effective as Period) same day as start of (HOOSSymptoms.effective as Period)
 				and HOOSSymptoms.value is not null
 		with [Observation: "Pain score [HOOS]"] HOOSPain
 			such that (HOOSPain.status = 'final' or HOOSPain.status = 'amended' or HOOSPain.status = 'corrected')
-			    and HOOSLifeQuality.authorDatetime same day as HOOSPain.authorDatetime
+			    and start of (HOOSLifeQuality.effective as Period) same day as start of (HOOSPain.effective as Period)
 				and HOOSPain.value is not null
 		where (HOOSLifeQuality.status = 'final' or HOOSLifeQuality.status = 'amended' or HOOSLifeQuality.status = 'corrected')
 		and HOOSLifeQuality.value is not null
@@ -100,7 +102,7 @@ define "PROMIS10 Total Assessment Scores":
 	[Observation: "PROMIS-10 Global Mental Health (GMH) score T-score"] Promis10MentalScore
 		with [Observation: "PROMIS-10 Global Physical Health (GPH) score T-score"] Promis10PhysicalScore
 			such that (Promis10PhysicalScore.status = 'final' or Promis10PhysicalScore.status = 'amended' or Promis10PhysicalScore.status = 'corrected')
-			    and Promis10MentalScore.authorDatetime same day as Promis10PhysicalScore.authorDatetime
+			    and start of (Promis10MentalScore.effective as Period) same day as start of (Promis10PhysicalScore.effective as Period)
 				and Promis10PhysicalScore.value is not null
 		where (Promis10MentalScore.status = 'final' or Promis10MentalScore.status = 'amended' or Promis10MentalScore.status = 'corrected')
 			    and Promis10MentalScore.value is not null
@@ -115,51 +117,51 @@ define "Qualifying Encounter":
 define "Assessed Initial and Followup HOOSJr with THA":
 	"Total Hip Arthroplasty Procedure" TotalHip
 		with "HOOSJr Total Assessment Scores" InitialHipAssessment
-			such that (TotalHip.performed as Period) starts 90 days or less on or after day of InitialHipAssessment.authorDatetime
+			such that (TotalHip.performed as Period) starts 90 days or less on or after day of start of (InitialHipAssessment.effective as Period)
 		with "HOOSJr Total Assessment Scores" FollowupHipAssessment
-			such that FollowupHipAssessment.authorDatetime 270 days or more after day of
+			such that start of (FollowupHipAssessment.effective as Period) 270 days or more after day of
 			end of (TotalHip.performed as Period)
-				and FollowupHipAssessment.authorDatetime 365 days or less after day of
+				and start of (FollowupHipAssessment.effective as Period) 365 days or less after day of
 				end of (TotalHip.performed as Period)
 
 define "Assessed Initial and Followup HOOS with THA":
 	"Total Hip Arthroplasty Procedure" TotalHip
 		with "HOOS Total Assessment Scores" InitialHipAssessmentHOOS
-			such that (TotalHip.performed as Period) starts 90 days or less on or after day of InitialHipAssessmentHOOS.authorDatetime
+			such that (TotalHip.performed as Period) starts 90 days or less on or after day of start of (InitialHipAssessmentHOOS.effective as Period)
 		with "HOOS Total Assessment Scores" FollowupHipAssessmentHOOS
-			such that FollowupHipAssessmentHOOS.authorDatetime 270 days or more after day of
+			such that start of (FollowupHipAssessmentHOOS.effective as Period) 270 days or more after day of
 			end of (TotalHip.performed as Period)
-				and FollowupHipAssessmentHOOS.authorDatetime 365 days or less after day of
+				and start of (FollowupHipAssessmentHOOS.effective as Period) 365 days or less after day of
 				end of (TotalHip.performed as Period)
 
 define "Assessed Initial and Followup PROMIS10 with THA":
 	"Total Hip Arthroplasty Procedure" TotalHip
 		with "PROMIS10 Total Assessment Scores" InitialHipAssessmentPROMIS10
-			such that (TotalHip.performed as Period) starts 90 days or less on or after day of InitialHipAssessmentPROMIS10.authorDatetime
+			such that (TotalHip.performed as Period) starts 90 days or less on or after day of start of (InitialHipAssessmentPROMIS10.effective as Period)
 		with "PROMIS10 Total Assessment Scores" FollowupHipAssessmentPROMIS10
-			such that FollowupHipAssessmentPROMIS10.authorDatetime 270 days or more after day of
+			such that start of (FollowupHipAssessmentPROMIS10.effective as Period) 270 days or more after day of
 			end of (TotalHip.performed as Period)
-				and FollowupHipAssessmentPROMIS10.authorDatetime 365 days or less after day of
+				and start of (FollowupHipAssessmentPROMIS10.effective as Period) 365 days or less after day of
 				end of (TotalHip.performed as Period)
 
 define "Assessed Initial and Followup VR12 Oblique with THA":
 	"Total Hip Arthroplasty Procedure" TotalHip
 		with "VR12 Oblique Total Assessment Scores" InitialHipAssessmentOblique
-			such that (TotalHip.performed as Period) starts 90 days or less on or after day of InitialHipAssessmentOblique.authorDatetime
+			such that (TotalHip.performed as Period) starts 90 days or less on or after day of start of (InitialHipAssessmentOblique.effective as Period)
 		with "VR12 Oblique Total Assessment Scores" FollowupHipAssessmentOblique
-			such that FollowupHipAssessmentOblique.authorDatetime 270 days or more after day of
+			such that start of (FollowupHipAssessmentOblique.effective as Period) 270 days or more after day of
 			end of (TotalHip.performed as Period)
-				and FollowupHipAssessmentOblique.authorDatetime 365 days or less after day of
+				and start of (FollowupHipAssessmentOblique.effective as Period) 365 days or less after day of
 				end of (TotalHip.performed as Period)
 
 define "Assessed Initial and Followup VR12 Orthogonal with THA":
 	"Total Hip Arthroplasty Procedure" TotalHip
 		with "VR12 Orthogonal Total Assessment Scores" InitialHipAssessmentOrthogonal
-			such that (TotalHip.performed as Period) starts 90 days or less on or after day of InitialHipAssessmentOrthogonal.authorDatetime
+			such that (TotalHip.performed as Period) starts 90 days or less on or after day of start of (InitialHipAssessmentOrthogonal.effective as Period)
 		with "VR12 Orthogonal Total Assessment Scores" FollowupHipAssessmentOrthogonal
-			such that FollowupHipAssessmentOrthogonal.authorDatetime 270 days or more after day of
+			such that start of (FollowupHipAssessmentOrthogonal.effective as Period) 270 days or more after day of
 			end of (TotalHip.performed as Period)
-				and FollowupHipAssessmentOrthogonal.authorDatetime 365 days or less after day of
+				and start of (FollowupHipAssessmentOrthogonal.effective as Period) 365 days or less after day of
 				end of (TotalHip.performed as Period)
 
 define "Numerator":
@@ -176,7 +178,7 @@ define "VR12 Orthogonal Total Assessment Scores":
 		with ( [Observation: "VR-12 Physical component summary (PCS) score - orthogonal method T-score"] VR12PhysicalOrthogonal
 			where (VR12PhysicalOrthogonal.status = 'final' or VR12PhysicalOrthogonal.status = 'amended' or VR12PhysicalOrthogonal.status = 'corrected')
 			    and VR12PhysicalOrthogonal.value is not null ) VR12PhysicalScore
-			such that VR12MentalScore.authorDatetime same day as VR12PhysicalScore.authorDatetime
+			such that start of (VR12MentalScore.effective as Period) same day as start of (VR12PhysicalScore.effective as Period)
 
 define "VR12 Oblique Total Assessment Scores":
 	( [Observation: "VR-12 Mental component summary (MCS) score - oblique method T-score"] VR12MentalAssessment
@@ -185,7 +187,7 @@ define "VR12 Oblique Total Assessment Scores":
 		with ( [Observation: "VR-12 Physical component summary (PCS) score - oblique method T-score"] VR12PhysicalAssessment
 			where (VR12PhysicalAssessment.status = 'final' or VR12PhysicalAssessment.status = 'amended' or VR12PhysicalAssessment.status = 'corrected')
 			    and VR12PhysicalAssessment.value is not null ) VR12PhysicalScore
-			such that VR12MentalScore.authorDatetime same day as VR12PhysicalScore.authorDatetime
+			such that start of (VR12MentalScore.effective as Period) same day as start of (VR12PhysicalScore.effective as Period)
 
 define "Initial Population":
 	exists ( "Total Hip Arthroplasty Procedure" )
@@ -197,8 +199,8 @@ define "Has Hospice":
 
             exists ( [Encounter: "Encounter Inpatient"] DischargeHospice
             		where (DischargeHospice.status='in-progress' or DischargeHospice.status='finished')
-            		    and (( DischargeHospice.hospitalization.dischargeDisposition as Code ~ "Discharge to home for hospice care (procedure)"
-            				or DischargeHospice.hospitalization.dischargeDisposition as Code ~ "Discharge to healthcare facility for hospice care (procedure)")
+            		    and (( FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to home for hospice care (procedure)"
+            				or FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to healthcare facility for hospice care (procedure)")
             		        )
             			and DischargeHospice.period ends during "Measurement Period"
                 )

@@ -46,7 +46,7 @@ define "Denominator Exceptions":
 
             "Qualifying Encounters During Measurement Period" EncounterDuringMeasurementPeriod
             	with  "Medications Not Documented for Medical Reason" MedicationsNotDocumented
-            		such that MedicationsNotDocumented.authorDatetime during EncounterDuringMeasurementPeriod.period
+            		such that start of (MedicationsNotDocumented.performed as Period) during EncounterDuringMeasurementPeriod.period
  
 
 define "Medications Documented During Qualifying Encounter":
