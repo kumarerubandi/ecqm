@@ -75,8 +75,8 @@ define "Most Recent Systolic Reading During Most Recent Blood Pressure Screening
 	)
 
 define "No Blood Pressure Screen":
-	[Observation: "Systolic blood pressure"]SystolicBP where SystolicBP.status = 'cancelled' or SystolicBP.status = 'entered-in-error'
-		union [Observation: "Diastolic blood pressure"]DiastolicBP where DiastolicBP.status = 'cancelled' or DiastolicBP.status = 'entered-in-error'
+	([Observation: "Systolic blood pressure"]SystolicBP where SystolicBP.status = 'cancelled' or SystolicBP.status = 'entered-in-error')
+		union ([Observation: "Diastolic blood pressure"]DiastolicBP where DiastolicBP.status = 'cancelled' or DiastolicBP.status = 'entered-in-error')
 
 define "No Blood Pressure Screen Due to Medical Reason or Patient Refusal":
 	"No Blood Pressure Screen" NoBPScreen
@@ -84,7 +84,7 @@ define "No Blood Pressure Screen Due to Medical Reason or Patient Refusal":
 			such that ( NoBPScreen.dataAbsentReason in "Medical or Other reason not done"
 					or NoBPScreen.dataAbsentReason in "Patient Reason refused"
 			)
-				and NoBPScreen.authorDatetime same day as start of QualifyingEncounter.period
+				and start of (NoBPScreen.effective as Period) same day as start of QualifyingEncounter.period
 
 define "Patients Age 18 Years and Older at Start of Measurement Period":
 	AgeInYearsAt(start of "Measurement Period")>= 18
@@ -93,82 +93,82 @@ define "Prehypertensive Blood Pressure at Most Recent Screening Encounter":
 	from
 		"Most Recent Systolic Reading During Most Recent Blood Pressure Screening Encounter" LastSystolicBP,
 		"Most Recent Diastolic Reading During Most Recent Blood Pressure Screening Encounter" LastDiastolicBP
-		where ( LastSystolicBP.value >= 120 'mm[Hg]'
-				or LastDiastolicBP.value >= 80 'mm[Hg]'
+		where ( FHIRHelpers.ToInteger(LastSystolicBP.value) >= 120 'mm[Hg]'
+				or FHIRHelpers.ToInteger(LastDiastolicBP.value) >= 80 'mm[Hg]'
 		)
-			and LastSystolicBP.value < 140 'mm[Hg]'
-			and LastDiastolicBP.value < 90 'mm[Hg]'
+			and FHIRHelpers.ToInteger(LastSystolicBP.value) < 140 'mm[Hg]'
+			and FHIRHelpers.ToInteger(LastDiastolicBP.value) < 90 'mm[Hg]'
 
 define "Antihypertensive Medication Not Ordered Due to Patient Refusal":
 	( [MedicationRequest: "Anti-Hypertensive Pharmacologic Therapy"] NoAntihypertensives
 			with "Qualifying Encounters During Measurement Period" QualifyingEncounter
 				such that NoAntihypertensives.intent!='order'  
-					and NoAntihypertensives.doNotPerform =true
-					and NoAntihypertensives.reasonNotTaken in "Patient Reason refused"
-					and NoAntihypertensives.authorDatetime same day as start of QualifyingEncounter.period
+					and FHIRHelpers.ToBoolean(NoAntihypertensives.doNotPerform) =true
+					and NoAntihypertensives.reasonCode in "Patient Reason refused"
+					and FHIRHelpers.ToDateTime(NoAntihypertensives.authoredOn) same day as start of QualifyingEncounter.period
 	)
 
 define "Antihypertensive Medications Ordered":
 	[MedicationRequest: "Anti-Hypertensive Pharmacologic Therapy"] AntihypertensiveMeds
 		with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
-			such that AntihypertensiveMeds.intent='order' 
-				and AntihypertensiveMeds.authorDatetime same day as start of LastBPEncounter.period
+			such that AntihypertensiveMeds.intent='order'
+				and FHIRHelpers.ToDateTime(AntihypertensiveMeds.authoredOn) same day as start of LastBPEncounter.period
 
 define "Blood Pressure Normal at Most Recent Screening Encounter":
 	from
 		"Most Recent Systolic Reading During Most Recent Blood Pressure Screening Encounter" LastSystolicBP,
 		"Most Recent Diastolic Reading During Most Recent Blood Pressure Screening Encounter" LastDiastolicBP
-		where ( LastSystolicBP.value < 120 'mm[Hg]'
-				and LastDiastolicBP.value < 80 'mm[Hg]'
+		where ( FHIRHelpers.ToInteger(LastSystolicBP.value) < 120 'mm[Hg]'
+				and FHIRHelpers.ToInteger(LastDiastolicBP.value) < 80 'mm[Hg]'
 		)
 
 define "Denominator Exclusions":
 	exists ( [Condition: "Diagnosis of hypertension"] Hypertension
 			with "Qualifying Encounters During Measurement Period" QualifyingEncounter
 				such that Hypertension.clinicalStatus.coding[0].code='active'
-					and Interval[ToDateTime(Hypertension.onset),ToDateTime(Hypertension.abatement)] starts before start of QualifyingEncounter.period
+					and Interval[FHIRHelpers.ToDateTime(Hypertension.onset),FHIRHelpers.ToDateTime(Hypertension.abatement)] starts before start of QualifyingEncounter.period
 	)
 
 define "Diagnostic Study Not Ordered Due to Patient Refusal":
 	( [ServiceRequest: "ECG 12 lead or study order"] NoDiagnosticStudy
 			with "Qualifying Encounters During Measurement Period" QualifyingEncounter
-				such that NoDiagnosticStudy.intent!='order' 
-					and NoDiagnosticStudy.doNotPerform =true
+				such that NoDiagnosticStudy.intent!='order'
+					and FHIRHelpers.ToBoolean(NoDiagnosticStudy.doNotPerform) =true
 					and NoDiagnosticStudy.reasonCode in "Patient Reason refused"
-					and NoDiagnosticStudy.authoredOn same day as start of QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(NoDiagnosticStudy.authoredOn) same day as start of QualifyingEncounter.period
 	)
 
 define "Electrocardiogram Ordered for Hypertension":
 	[ServiceRequest: "ECG 12 lead or study order"] ECG
 		with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
-			such that ECG.intent='order' 
-				and ECG.authoredOn same day as start of LastBPEncounter.period
+			such that ECG.intent='order'
+				and FHIRHelpers.ToDateTime(ECG.authoredOn) same day as start of LastBPEncounter.period
 
 define "Follow Up Within 4 Weeks":
 	[ServiceRequest: "Followup within 4 weeks"] Followup4Weeks
 		with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
-			such that Followup4Weeks.intent='order' 
-				and Followup4Weeks.authoredOn same day as start of LastBPEncounter.period
+			such that Followup4Weeks.intent='order'
+				and FHIRHelpers.ToDateTime(Followup4Weeks.authoredOn) same day as start of LastBPEncounter.period
 
 define "Hypertensive Followup Interventions Not Ordered":
-	([ServiceRequest: "Referral to Alternative Provider / Primary Care Provider"]SR where SR.intent!='order' 
-					and SR.doNotPerform =true)
-		union ([ServiceRequest: "Lifestyle Recommendation"]SR where SR.intent!='order' 
-					and SR.doNotPerform =true)
-		union ([ServiceRequest: "Weight Reduction Recommended"]SR where SR.intent!='order' 
-					and SR.doNotPerform =true)
-		union ([ServiceRequest: "Dietary Recommendations"]SR where SR.intent!='order' 
-					and SR.doNotPerform =true)
-		union ([ServiceRequest: "Physical Activity Recommendation"]SR where SR.intent!='order' 
-					and SR.doNotPerform =true)
-		union ([ServiceRequest: "Moderation of ETOH Consumption Recommendation"]SR where SR.intent!='order' 
-					and SR.doNotPerform =true)
+	([ServiceRequest: "Referral to Alternative Provider / Primary Care Provider"]SR where SR.intent!='order'
+					and FHIRHelpers.ToBoolean(SR.doNotPerform) =true)
+		union ([ServiceRequest: "Lifestyle Recommendation"]SR where SR.intent!='order'
+					and FHIRHelpers.ToBoolean(SR.doNotPerform) =true)
+		union ([ServiceRequest: "Weight Reduction Recommended"]SR where SR.intent!='order'
+					and FHIRHelpers.ToBoolean(SR.doNotPerform) =true)
+		union ([ServiceRequest: "Dietary Recommendations"]SR where SR.intent!='order'
+					and FHIRHelpers.ToBoolean(SR.doNotPerform) =true)
+		union ([ServiceRequest: "Physical Activity Recommendation"]SR where SR.intent!='order'
+					and FHIRHelpers.ToBoolean(SR.doNotPerform) =true)
+		union ([ServiceRequest: "Moderation of ETOH Consumption Recommendation"]SR where SR.intent!='order'
+					and FHIRHelpers.ToBoolean(SR.doNotPerform) =true)
 
 define "Hypertensive Followup Interventions Not Ordered Due to Patient Refusal":
 	"Hypertensive Followup Interventions Not Ordered" NoInterventions
 		with "Qualifying Encounters During Measurement Period" QualifyingEncounter
 			such that NoInterventions.reasonCode in "Patient Reason refused"
-				and NoInterventions.authoredOn same day as start of QualifyingEncounter.period
+				and FHIRHelpers.ToDateTime(NoInterventions.authoredOn) same day as start of QualifyingEncounter.period
 
 define "Hypertensive Interventions":
 	([ServiceRequest: "Lifestyle Recommendation"]SR where SR.intent='order')
@@ -190,7 +190,7 @@ define "Last Diastolic One Year Prior to Encounter":
 
 define "Last Diastolic One Year Prior to Encounter High":
 	"Last Diastolic One Year Prior to Encounter" LastDiastolic
-		where LastDiastolic.value >= 90 'mm[Hg]'
+		where FHIRHelpers.ToInteger(LastDiastolic.value) >= 90 'mm[Hg]'
 
 define "Last Systolic One Year Prior to Encounter":
 	Last([Observation: "Systolic blood pressure"] SystolicBP
@@ -201,7 +201,7 @@ define "Last Systolic One Year Prior to Encounter":
 
 define "Last Systolic One Year Prior to Encounter High":
 	"Last Systolic One Year Prior to Encounter" LastSystolic
-		where LastSystolic.value >= 140 'mm[Hg]'
+		where FHIRHelpers.ToInteger(LastSystolic.value) >= 140 'mm[Hg]'
 
 define "Denominator":
 	"Initial Population"
@@ -210,8 +210,8 @@ define "High Blood Pressure at Most Recent Screening Encounter":
 	from
 		"Most Recent Systolic Reading During Most Recent Blood Pressure Screening Encounter" LastSystolicBP,
 		"Most Recent Diastolic Reading During Most Recent Blood Pressure Screening Encounter" LastDiastolicBP
-		where ( LastSystolicBP.value >= 140 'mm[Hg]'
-				or LastDiastolicBP.value >= 90 'mm[Hg]'
+		where ( FHIRHelpers.ToInteger(LastSystolicBP.value) >= 140 'mm[Hg]'
+				or FHIRHelpers.ToInteger(LastDiastolicBP.value) >= 90 'mm[Hg]'
 		)
 
 define "Last Blood Pressure Within One Year High":
@@ -222,15 +222,15 @@ define "Labs Ordered for Hypertension":
 	[ServiceRequest: "Laboratory Tests for Hypertension"] HypertensionLabs
 		with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
 			such that HypertensionLabs.intent='order'
-				and HypertensionLabs.authoredOn same day as start of LastBPEncounter.period
+				and FHIRHelpers.ToDateTime(HypertensionLabs.authoredOn) same day as start of LastBPEncounter.period
 
 define "Lab Test for Hypertension Not Ordered Due to Patient Refusal":
 	( [ServiceRequest: "Laboratory Tests for Hypertension"] NoLabsOrdered
 			with "Qualifying Encounters During Measurement Period" QualifyingEncounter
-				such that NoLabsOrdered.intent!='order' 
-					and NoLabsOrdered.doNotPerform =true
+				such that NoLabsOrdered.intent!='order'
+					and FHIRHelpers.ToBoolean(NoLabsOrdered.doNotPerform) =true
 					and NoLabsOrdered.reasonCode in "Patient Reason refused"
-					and NoLabsOrdered.authoredOn same day as start of QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(NoLabsOrdered.authoredOn) same day as start of QualifyingEncounter.period
 	)
 
 define "Interventions for Second Hypertensive Reading":
@@ -259,14 +259,14 @@ define "Referral to Alternate Provider":
 	( [ServiceRequest: "Referral to Alternative Provider / Primary Care Provider"] Referral
 			with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
 				such that Referral.intent='order' 
-					and Referral.authoredOn same day as start of LastBPEncounter.period
+					and FHIRHelpers.ToDateTime(Referral.authoredOn) same day as start of LastBPEncounter.period
 					and Referral.reasonCode in "Finding of Elevated Blood Pressure or Hypertension"
 	)
 
 define "Hypertensive Interventions at Most Recent Blood Pressure Encounter":
 	exists ( "Hypertensive Interventions" HighBloodPressureInterventions
 			with "Most Recent Blood Pressure Screening Encounter" MostRecentBloodPressureEncounter
-				such that HighBloodPressureInterventions.authorDatetime same day as start of MostRecentBloodPressureEncounter.period
+				such that FHIRHelpers.ToDateTime(HighBloodPressureInterventions.authoredOn) same day as start of MostRecentBloodPressureEncounter.period
 	)
 
 define "Has Second Hypertensive Reading With Interventions":
@@ -288,7 +288,7 @@ define "Follow Up One Year":
 	exists ( [ServiceRequest: "Followup within one year"] FollowupOneYear
 			with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
 				such that FollowupOneYear.intent='order' 
-					and FollowupOneYear.authoredOn same day as start of LastBPEncounter.period
+					and FHIRHelpers.ToDateTime(FollowupOneYear.authoredOn) same day as start of LastBPEncounter.period
 	)
 
 define "Has Prehypertensive Reading With Interventions":

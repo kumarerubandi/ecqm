@@ -49,13 +49,13 @@ define "Denominator":
 define "Dementia Diagnosis":
 	[Condition: "Severe dementia (disorder)"] Dementia
 		where Dementia.clinicalStatus.coding[0].code='active'
-			and Interval[ToDateTime(Dementia.onset),ToDateTime(Dementia.abatement)] overlaps "Measurement Period"
+			and Interval[FHIRHelpers.ToDateTime(Dementia.onset),FHIRHelpers.ToDateTime(Dementia.abatement)] overlaps "Measurement Period"
 
 define "Total Hip Arthroplasty with 2 or More Lower Body Fractures":
 	"Total Hip Arthroplasty Procedure" THAProcedure
 		where Count([Condition: "Fracture - Lower Body"] LowerBodyFracture
 				where LowerBodyFracture.clinicalStatus.coding[0].code='active'
-			    and Interval[ToDateTime(LowerBodyFracture.onset),ToDateTime(LowerBodyFracture.abatement)] starts less than 1 day on or before (THAProcedure.performed as Period)
+			    and Interval[FHIRHelpers.ToDateTime(LowerBodyFracture.onset),FHIRHelpers.ToDateTime(LowerBodyFracture.abatement)] starts less than 1 day on or before (THAProcedure.performed as Period)
 		)>= 2
 
 define "Denominator Exclusions":
@@ -204,7 +204,7 @@ define "Has Hospice":
                 )
             	or exists ( [ServiceRequest: "Hospice care ambulatory"] HospiceOrder
             			where HospiceOrder.intent= 'order'
-				and HospiceOrder.authoredOn during "Measurement Period"
+				and FHIRHelpers.ToDateTime(HospiceOrder.authoredOn) during "Measurement Period"
             	)
             	or exists ( [Procedure: "Hospice care ambulatory"] HospicePerformed
             			where (HospicePerformed.performed as Period) overlaps "Measurement Period"

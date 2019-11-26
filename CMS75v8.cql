@@ -40,7 +40,7 @@ define "Denominator":
 define "Numerator":
 	exists ( [Condition: "Dental Caries"] DentalCaries
 			where DentalCaries.clinicalStatus.coding[0].code='active'
-				and Interval[ToDateTime(DentalCaries.onset),ToDateTime(DentalCaries.abatement)] overlaps "Measurement Period"
+				and Interval[FHIRHelpers.ToDateTime(DentalCaries.onset),FHIRHelpers.ToDateTime(DentalCaries.abatement)] overlaps "Measurement Period"
 	)
 
 define "Denominator Exclusions":
@@ -71,7 +71,7 @@ define "Has Hospice":
                 )
             	or exists ( [ServiceRequest: "Hospice care ambulatory"] HospiceOrder
             			where HospiceOrder.intent= 'order'
-				and HospiceOrder.authoredOn during "Measurement Period"
+				and FHIRHelpers.ToDateTime(HospiceOrder.authoredOn) during "Measurement Period"
             	)
             	or exists ( [Procedure: "Hospice care ambulatory"] HospicePerformed
             			where (HospicePerformed.performed as Period) overlaps "Measurement Period"

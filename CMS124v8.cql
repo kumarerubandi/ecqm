@@ -47,7 +47,7 @@ define "Qualifying Encounters":
 define "Congenital Absence of Cervix":
 	[Condition: "Congenital absence of cervix (disorder)"] NoCervixBirth
 		where NoCervixBirth.clinicalStatus.coding[0].code='active'
-			and Interval[ToDateTime(NoCervixBirth.onset),ToDateTime(NoCervixBirth.abatement)]  starts before end of "Measurement Period"
+			and Interval[FHIRHelpers.ToDateTime(NoCervixBirth.onset),FHIRHelpers.ToDateTime(NoCervixBirth.abatement)]  starts before end of "Measurement Period"
 
 define "Pap Test with Results":
 	[Observation: "Pap Test"] PapTestWithResult
@@ -102,7 +102,7 @@ define "Has Hospice":
                 )
             	or exists ( [ServiceRequest: "Hospice care ambulatory"] HospiceOrder
             			where HospiceOrder.intent= 'order'
-				and HospiceOrder.authoredOn during "Measurement Period"
+				and FHIRHelpers.ToDateTime(HospiceOrder.authoredOn) during "Measurement Period"
             	)
             	or exists ( [Procedure: "Hospice care ambulatory"] HospicePerformed
             			where (HospicePerformed.performed as Period) overlaps "Measurement Period"

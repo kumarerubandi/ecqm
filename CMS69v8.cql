@@ -45,7 +45,7 @@ define "Denominator":
 define "Pregnancy During Measurement Period":
 	[Condition: "Pregnancy Dx"] Pregnancy
 		where Pregnancy.clinicalStatus.coding[0].code='active'
-				and Interval[ToDateTime(Pregnancy.onset),ToDateTime(Pregnancy.abatement)] overlaps "Measurement Period"
+				and Interval[FHIRHelpers.ToDateTime(Pregnancy.onset),FHIRHelpers.ToDateTime(Pregnancy.abatement)] overlaps "Measurement Period"
 
 define "Numerator":
 	"Has Normal BMI" is not null
@@ -107,7 +107,7 @@ define "No BMI Referral Due to Medical Reason":
 			such that NoReferral.intent!='order' 
 				and NoReferral.doNotPerform =true
 				and NoReferral.reasonCode in "Medical or Other reason not done"
-				and NoReferral.authoredOn 12 months or less on or before day of QualifyingEncounter.period
+				and FHIRHelpers.ToDateTime(NoReferral.authoredOn) 12 months or less on or before day of QualifyingEncounter.period
 
 define "No Medication Order For High BMI Due to Medical Reason":
 	[MedicationRequest: "Above Normal Medications"] HighBMINoMedications
@@ -146,7 +146,7 @@ define "High BMI Follow Up Encounters":
 					where Referral.intent='order' and Referral.reason in "Overweight or Obese"
 			)
 			union ([MedicationRequest: "Above Normal Medications"] MR where MR.intent='order')) HighBMIInterventions
-			such that Coalesce(start of (HighBMIInterventions.occurrence as Period), HighBMIInterventions.authoredOn)12 months or less on or before
+			such that Coalesce(start of (HighBMIInterventions.occurrence as Period), FHIRHelpers.ToDateTime(HighBMIInterventions.authoredOn))12 months or less on or before
 			end of QualifyingEncounter.period
 
 define "Low BMI Follow Up Encounters":
@@ -157,7 +157,7 @@ define "Low BMI Follow Up Encounters":
 					where Referral.intent='order' and Referral.reason in "Underweight")
 			union ([MedicationRequest: "Below Normal Medications"]MR where MR.intent='order')
 			) LowBMIInterventions
-			such that Coalesce(start of (LowBMIInterventions.occurrence as Period), LowBMIInterventions.authoredOn)12 months or less on or before
+			such that Coalesce(start of (LowBMIInterventions.occurrence as Period), FHIRHelpers.ToDateTime(LowBMIInterventions.authoredOn))12 months or less on or before
 			end of QualifyingEncounter.period
 
 define "No Follow Up For High BMI Due to Medical Reason":
@@ -165,7 +165,7 @@ define "No Follow Up For High BMI Due to Medical Reason":
 		union ([Procedure: "Above Normal Follow-up"]P where P.status!='in-progress' and P.status!='completed') ) HighBMINoFollowup
 		with "Qualifying Encounters During the Measurement Period" QualifyingEncounter
 			such that HighBMINoFollowup.reasonCode in "Medical or Other reason not done"
-				and HighBMINoFollowup.authoredOn 12 months or less on or before day of QualifyingEncounter.period
+				and FHIRHelpers.ToDateTime(HighBMINoFollowup.authoredOn) 12 months or less on or before day of QualifyingEncounter.period
 
 define "Denominator Exclusions":
 	exists ( "Palliative or Hospice Care Order or Encounter" )
@@ -188,11 +188,11 @@ define "No Follow Up For Low BMI Due to Medical Reason":
 		union [Procedure: "Below Normal Follow up"]P where P.status='not-done' ) LowBMINoFollowUp
 		with "Qualifying Encounters During the Measurement Period" QualifyingEncounter
 			such that LowBMINoFollowUp.reasonCode in "Medical or Other reason not done"
-				and LowBMINoFollowUp.authoredOn 12 months or less on or before day of QualifyingEncounter.period
+				and FHIRHelpers.ToDateTime(LowBMINoFollowUp.authoredOn) 12 months or less on or before day of QualifyingEncounter.period
 
 define "Palliative or Hospice Care Ordered":
 	[ServiceRequest: "Palliative or Hospice Care"] PalliativeOrHospiceCareOrder
 		with "Qualifying Encounters During the Measurement Period" QualifyingEncounter
 			such that PalliativeOrHospiceCareOrder.intent='order' 
-				and PalliativeOrHospiceCareOrder.authoredOn on or before
+				and FHIRHelpers.ToDateTime(PalliativeOrHospiceCareOrder.authoredOn) on or before
 			end of QualifyingEncounter.period

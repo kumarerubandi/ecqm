@@ -62,7 +62,7 @@ define "First Referral During Measurement Period":
             First([Procedure: "Referral"] ReferralPerformed
             		where (ReferralPerformed.status.value='in-progress' or ReferralPerformed.status.value='completed')
             		 and (ReferralPerformed.performed as Period) starts during "Measurement Period"
-            		sort by authorDatetime
+            		sort by start of (performed as Period)
             )
 
 
@@ -71,8 +71,8 @@ define "Referring Provider Communicated Consultant Report to Close Referral Loop
             [Communication: "Consultant Report"] ConsultantReportCommunicated
             	with "First Referral During Measurement Period" FirstReferralPerformed
             		such that (ConsultantReportCommunicated.status.value='in-progress' or ConsultantReportCommunicated.status.value='completed') 
-            		and FirstReferralPerformed.id in ConsultantReportCommunicated.basedOn
-            			and ConsultantReportCommunicated.authorDatetime after start of (FirstReferralPerformed.performed as Period)
+            		and 'Procedure/'+FirstReferralPerformed.id = "ConsultantReportCommunication"(ConsultantReportCommunicated)
+            			and FHIRHelpers.ToDateTime(ConsultantReportCommunicated.sent) after start of (FirstReferralPerformed.performed as Period)
 
-
-
+define function "ConsultantReportCommunication"(C Communication):
+	C.basedOn[0].reference.value
