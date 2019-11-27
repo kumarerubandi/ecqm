@@ -75,4 +75,4 @@ define "Referring Provider Communicated Consultant Report to Close Referral Loop
             			and FHIRHelpers.ToDateTime(ConsultantReportCommunicated.sent) after start of (FirstReferralPerformed.performed as Period)
 
 define function "ConsultantReportCommunication"(C Communication):
-	C.basedOn[0].reference.value
+	(singleton from (C."basedOn" b where 'Procedure' in b.reference.value)).reference.value
