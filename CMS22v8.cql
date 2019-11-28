@@ -134,7 +134,7 @@ define "Diagnostic Study Not Ordered Due to Patient Refusal":
 			with "Qualifying Encounters During Measurement Period" QualifyingEncounter
 				such that NoDiagnosticStudy.intent!='order'
 					and FHIRHelpers.ToBoolean(NoDiagnosticStudy.doNotPerform) =true
-					and NoDiagnosticStudy.reasonCode in "Patient Reason refused"
+					and  "NoSR"(NoDiagnosticStudy) in "Patient Reason refused"
 					and FHIRHelpers.ToDateTime(NoDiagnosticStudy.authoredOn) same day as start of QualifyingEncounter.period
 	)
 
@@ -167,7 +167,7 @@ define "Hypertensive Followup Interventions Not Ordered":
 define "Hypertensive Followup Interventions Not Ordered Due to Patient Refusal":
 	"Hypertensive Followup Interventions Not Ordered" NoInterventions
 		with "Qualifying Encounters During Measurement Period" QualifyingEncounter
-			such that NoInterventions.reasonCode in "Patient Reason refused"
+			such that "NoSR"(NoInterventions) in "Patient Reason refused"
 				and FHIRHelpers.ToDateTime(NoInterventions.authoredOn) same day as start of QualifyingEncounter.period
 
 define "Hypertensive Interventions":
@@ -229,7 +229,7 @@ define "Lab Test for Hypertension Not Ordered Due to Patient Refusal":
 			with "Qualifying Encounters During Measurement Period" QualifyingEncounter
 				such that NoLabsOrdered.intent!='order'
 					and FHIRHelpers.ToBoolean(NoLabsOrdered.doNotPerform) =true
-					and NoLabsOrdered.reasonCode in "Patient Reason refused"
+					and "NoSR"(NoLabsOrdered) in "Patient Reason refused"
 					and FHIRHelpers.ToDateTime(NoLabsOrdered.authoredOn) same day as start of QualifyingEncounter.period
 	)
 
@@ -297,3 +297,7 @@ define "Has Prehypertensive Reading With Interventions":
 				and "Follow Up One Year"
 		)
 		or exists ( "Referral to Alternate Provider" )
+
+
+define function "NoSR"(SR ServiceRequest):
+	(singleton from (SR.extension e where e.url='http://hl7.org/fhir/StructureDefinition/request-statusReason')).value as Coding

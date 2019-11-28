@@ -3,7 +3,6 @@ library BMIScreeningandFollowupPlan version '8.2.000'
 using FHIR version '4.0.0'
 
 include FHIRHelpers version '4.0.0' called FHIRHelpers
-//include MATGlobalCommonFunctions version '4.0.000' called MATGlobalCommonFunctions
 
 codesystem "ICD-10-CM": 'http://hl7.org/fhir/sid/icd-10-cm'
 codesystem "LOINC": 'http://loinc.org'
@@ -106,7 +105,7 @@ define "No BMI Referral Due to Medical Reason":
 		with "Qualifying Encounters During the Measurement Period" QualifyingEncounter
 			such that NoReferral.intent!='order'
 				and FHIRHelpers.ToBoolean(NoReferral.doNotPerform) =true
-				and NoReferral.reasonCode in "Medical or Other reason not done"
+				and "NoSR"(NoReferral) in "Medical or Other reason not done"
 				and FHIRHelpers.ToDateTime(NoReferral.authoredOn) 12 months or less on or before day of start of QualifyingEncounter.period
 
 define "No Medication Order For High BMI Due to Medical Reason":
@@ -164,7 +163,7 @@ define "No Follow Up For High BMI Due to Medical Reason":
 	( ([ServiceRequest: "Above Normal Follow-up"]SR where SR.intent!='order' and FHIRHelpers.ToBoolean(SR.doNotPerform) =true)
 		union ([Procedure: "Above Normal Follow-up"]P where P.status!='in-progress' and P.status!='completed') ) HighBMINoFollowup
 		with "Qualifying Encounters During the Measurement Period" QualifyingEncounter
-			such that HighBMINoFollowup.reasonCode in "Medical or Other reason not done"
+			such that "NoSR"(HighBMINoFollowup) in "Medical or Other reason not done"
 				and FHIRHelpers.ToDateTime(HighBMINoFollowup.authoredOn) 12 months or less on or before day of start of QualifyingEncounter.period
 
 define "Denominator Exclusions":
@@ -187,7 +186,7 @@ define "No Follow Up For Low BMI Due to Medical Reason":
 	( ([ServiceRequest: "Below Normal Follow up"]SR where SR.intent!='order' and FHIRHelpers.ToBoolean(SR.doNotPerform) =true)
 		union [Procedure: "Below Normal Follow up"]P where P.status='not-done' ) LowBMINoFollowUp
 		with "Qualifying Encounters During the Measurement Period" QualifyingEncounter
-			such that LowBMINoFollowUp.reasonCode in "Medical or Other reason not done"
+			such that "NoSR"(LowBMINoFollowUp) in "Medical or Other reason not done"
 				and FHIRHelpers.ToDateTime(LowBMINoFollowUp.authoredOn) 12 months or less on or before day of start of QualifyingEncounter.period
 
 define "Palliative or Hospice Care Ordered":
@@ -196,3 +195,7 @@ define "Palliative or Hospice Care Ordered":
 			such that PalliativeOrHospiceCareOrder.intent='order' 
 				and FHIRHelpers.ToDateTime(PalliativeOrHospiceCareOrder.authoredOn) on or before
 			end of QualifyingEncounter.period
+
+define function "NoSR"(SR ServiceRequest):
+	(singleton from (SR.extension e where e.url='http://hl7.org/fhir/StructureDefinition/request-statusReason')).value as Coding
+
