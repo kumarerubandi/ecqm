@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dbc261d-3ff9-4e9c-97b5-866167254321" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMS122v8.cql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMS154v8.cql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMS159v8.cql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMS130v8.cql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMS147v9.cql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,21 +26,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMS2v9.cql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMS2v9.cql">
+      <file leaf-file-name="CMS75v8.cql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMS75v8.cql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="187" column="32" lean-forward="false" selection-start-line="187" selection-start-column="32" selection-end-line="187" selection-end-column="32" />
+            <state relative-caret-position="-56">
+              <caret line="29" column="23" lean-forward="false" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMS161v8.cql" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CMS161v8.cql">
+      <file leaf-file-name="CMS124v8.cql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMS124v8.cql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="61" column="28" lean-forward="false" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
+            <state relative-caret-position="142">
+              <caret line="91" column="21" lean-forward="true" selection-start-line="91" selection-start-column="21" selection-end-line="91" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMS147v9.cql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CMS147v9.cql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="570">
+              <caret line="189" column="5" lean-forward="false" selection-start-line="189" selection-start-column="5" selection-end-line="189" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -51,29 +60,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>autho</find>
-      <find>Depression Assessments Greater than 9</find>
-      <find>author</find>
-      <find>Patient Expired</find>
-      <find>FHIRHelpers.ToInteger(</find>
-      <find>e</find>
-      <find>en</find>
-      <find>encoun</find>
-      <find>encount</find>
-      <find>encountercon</find>
-      <find>encounterco</find>
-      <find>encounterc</find>
-      <find>encounter</find>
-      <find>edncounter</find>
-      <find>edencounter</find>
-      <find>edefncounter</find>
-      <find>edefincounter</find>
-      <find>edefinncounter</find>
-      <find>edefinencounter</find>
-      <find>eefinencounter</find>
-      <find>efinencounter</find>
-      <find>deefinencounter</find>
-      <find>definencounter</find>
       <find>define ncounter</find>
       <find>define &quot;ncounter</find>
       <find>define &quot;encounter</find>
@@ -81,6 +67,29 @@
       <find>defi</find>
       <find>define f</find>
       <find>define func</find>
+      <find>co</find>
+      <find>comple</find>
+      <find>Observation</find>
+      <find>Observation:</find>
+      <find>DiagnosticReport</find>
+      <find>&quot;Qualifying Encounters&quot;</find>
+      <find>f</find>
+      <find>fhir</find>
+      <find>fhirh</find>
+      <find>fhirhe</find>
+      <find>fhirhel</find>
+      <find>fhirhelpers.</find>
+      <find>&quot;Encounter, Performed&quot;</find>
+      <find>&quot;Procedure, Performed&quot;</find>
+      <find>c</find>
+      <find>correc</find>
+      <find>[Procedure:</find>
+      <find>r</find>
+      <find>re</find>
+      <find>reason</find>
+      <find>reasonc</find>
+      <find>reasoncod</find>
+      <find>reasoncode</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -91,6 +100,7 @@
       <replace>FHIRHelpers.ToDateTime</replace>
       <replace>Condition</replace>
       <replace>Encounter</replace>
+      <replace>Procedure</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -126,6 +136,8 @@
         <option value="$PROJECT_DIR$/CMS154v8.cql" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_15.xml" />
         <option value="$PROJECT_DIR$/CMS159v8.cql" />
+        <option value="$PROJECT_DIR$/CMS130v8.cql" />
+        <option value="$PROJECT_DIR$/CMS147v9.cql" />
       </list>
     </option>
   </component>
@@ -150,8 +162,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -176,10 +186,12 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CMS125v8.cql" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/ep" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="XML" />
   </component>
   <component name="RunDashboard">
@@ -307,6 +319,30 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_15.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMS2v9.cql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3366">
+          <caret line="187" column="32" lean-forward="false" selection-start-line="187" selection-start-column="32" selection-end-line="187" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMS161v8.cql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1098">
+          <caret line="61" column="28" lean-forward="false" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMS56v8.cql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1260">
@@ -363,14 +399,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMS771v1.cql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="53" lean-forward="false" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/CMS771v1.cql" />
     <entry file="file://$PROJECT_DIR$/CMS133v8.cql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
@@ -423,14 +452,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-614">
           <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMS75v8.cql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-414">
-          <caret line="25" column="39" lean-forward="true" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -499,34 +520,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AdvancedIllnessandFrailtyExclusionECQM-4.0.000.cql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="77" column="54" lean-forward="false" selection-start-line="77" selection-start-column="54" selection-end-line="77" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../CMS125v8.cql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="117" column="5" lean-forward="true" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../CMS125v8.cql" />
     <entry file="file://$PROJECT_DIR$/CMS122v8.cql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="83" column="27" lean-forward="false" selection-start-line="83" selection-start-column="27" selection-end-line="83" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_15.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -555,14 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMS124v8.cql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-812">
-          <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMS153.cql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2414">
@@ -573,16 +563,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMS2v9.cql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
+        <state relative-caret-position="-938">
           <caret line="187" column="32" lean-forward="false" selection-start-line="187" selection-start-column="32" selection-end-line="187" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_15.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CMS161v8.cql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="61" column="28" lean-forward="false" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
+        <state relative-caret-position="288">
+          <caret line="16" column="9" lean-forward="false" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMS75v8.cql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-56">
+          <caret line="29" column="23" lean-forward="false" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AdvancedIllnessandFrailtyExclusionECQM-4.0.000.cql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1206">
+          <caret line="73" column="32" lean-forward="false" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMS130v8.cql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2286">
+          <caret line="127" column="63" lean-forward="false" selection-start-line="127" selection-start-column="63" selection-end-line="127" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMS124v8.cql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="91" column="21" lean-forward="true" selection-start-line="91" selection-start-column="21" selection-end-line="91" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMS147v9.cql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="189" column="5" lean-forward="false" selection-start-line="189" selection-start-column="5" selection-end-line="189" selection-end-column="5" />
           <folding />
         </state>
       </provider>
