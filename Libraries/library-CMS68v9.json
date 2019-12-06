@@ -1,0 +1,79 @@
+{
+    "resourceType": "Library",
+    "id": "library-CMS68v9",
+    "meta": {
+      "versionId": "1",
+      "lastUpdated": "2019-08-16T23:03:04.792+00:00",
+      "profile": [
+        "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/library-cqfm"
+      ]
+    },
+    "url": "http://hl7.org/fhir/us/cqfmeasures/Library/library-CMS68v9",
+    "identifier": [
+      {
+        "use": "official",
+        "system": "http://example.org/fhir/cqi/ecqm/Library/Identifier",
+        "value": "CMS68v9"
+      }
+    ],
+    "version": "8.2.000",
+    "name": "DocumentationofCurrentMedicationsintheMedicalRecord",
+    "title": "Documentation of Current Medications in the Medical Record",
+    "status": "active",
+    "experimental": true,
+    "type": {
+      "coding": [
+        {
+          "system": "http://hl7.org/fhir/library-type",
+          "code": "logic-library"
+        }
+      ] 
+    },
+    "date": "2019-12-03",
+    "publisher": "Health Level 7 International - Clinical Quality Information Work Group",
+    "description": "This library is used as an example in the FHIR Quality Measure Implementation Guide",
+    "approvalDate": "2019-08-03",
+    "lastReviewDate": "2019-08-03",
+    "contact": [
+      {
+        "telecom": [
+          {
+            "system": "url",
+            "value": "http://www.hl7.org/Special/committees/cqi/index.cfm"
+          }
+        ]
+      }
+    ],
+    "relatedArtifact": [
+      {
+        "type": "depends-on"
+      }
+    ],
+    "dataRequirement": [
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1116.361"
+          }
+        ]
+      },  
+     
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.600.1.1834"
+          }
+        ]
+      }
+    ],
+    "content": [
+      {
+        "contentType": "text/cql",
+        "data": "bGlicmFyeSBEb2N1bWVudGF0aW9ub2ZDdXJyZW50TWVkaWNhdGlvbnNpbnRoZU1lZGljYWxSZWNvcmQgdmVyc2lvbiAnOS4xLjAwMCcKCnVzaW5nIEZISVIgdmVyc2lvbiAnNC4wLjAnCgppbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4wJyBjYWxsZWQgRkhJUkhlbHBlcnMKCmNvZGVzeXN0ZW0gIklDRC0xMC1DTSI6ICdodHRwOi8vaGw3Lm9yZy9maGlyL3NpZC9pY2QtMTAtY20nCmNvZGVzeXN0ZW0gIkxPSU5DIjogJ2h0dHA6Ly9sb2luYy5vcmcnCmNvZGVzeXN0ZW0gIkhDUENTIjogJ2h0dHBzOi8vaGNwY3MuY29kZXMvJwpjb2Rlc3lzdGVtICJTTk9NRURDVCI6ICdodHRwOi8vc25vbWVkLmluZm8vc2N0Jwpjb2Rlc3lzdGVtICJDUFQiOiAnaHR0cHM6Ly93d3cuYWFwYy5jb20vcmVzb3VyY2VzL21lZGljYWwtY29kaW5nL2NwdC5hc3B4Jwpjb2Rlc3lzdGVtICJOVUNDUFQiOidodHRwczovL3d3dy5ubG0ubmloLmdvdi9yZXNlYXJjaC91bWxzL3NvdXJjZXJlbGVhc2Vkb2NzL2N1cnJlbnQvTlVDQ1BUL3NvdXJjZXJlcHJlc2VudGF0aW9uLmh0bWwnCmNvZGVzeXN0ZW0gIlJYTk9STSIgOiAnaHR0cDovL3d3dy5ubG0ubmloLmdvdi9yZXNlYXJjaC91bWxzL3J4bm9ybScKCnZhbHVlc2V0ICJFdGhuaWNpdHkiOicyLjE2Ljg0MC4xLjExNDIyMi40LjExLjgzNycKdmFsdWVzZXQgIk1lZGljYWwgb3IgT3RoZXIgcmVhc29uIG5vdCBkb25lIjonMi4xNi44NDAuMS4xMTM4ODMuMy42MDAuMS4xNTAyJwp2YWx1ZXNldCAiTWVkaWNhdGlvbnMgRW5jb3VudGVyIENvZGUgU2V0IjonMi4xNi44NDAuMS4xMTM4ODMuMy42MDAuMS4xODM0Jwp2YWx1ZXNldCAiT05DIEFkbWluaXN0cmF0aXZlIFNleCI6JzIuMTYuODQwLjEuMTEzNzYyLjEuNC4xJwp2YWx1ZXNldCAiUGF5ZXIiOicyLjE2Ljg0MC4xLjExNDIyMi40LjExLjM1OTEnCnZhbHVlc2V0ICJSYWNlIjonMi4xNi44NDAuMS4xMTQyMjIuNC4xMS44MzYnCnZhbHVlc2V0ICJDdXJyZW50IE1lZGljYXRpb25zIERvY3VtZW50ZWQiOicyLjE2Ljg0MC4xLjExMzc2Mi4xLjQuMTExNi4zNjEnCgpjb2RlICJEb2N1bWVudGF0aW9uIG9mIGN1cnJlbnQgbWVkaWNhdGlvbnMgKHByb2NlZHVyZSkiOic0MjgxOTEwMDAxMjQxMDEnIGZyb20gIlNOT01FRENUIiBkaXNwbGF5ICdEb2N1bWVudGF0aW9uIG9mIGN1cnJlbnQgbWVkaWNhdGlvbnMgKHByb2NlZHVyZSknCgpwYXJhbWV0ZXIgIk1lYXN1cmVtZW50IFBlcmlvZCIgSW50ZXJ2YWw8RGF0ZVRpbWU+Cgpjb250ZXh0IFBhdGllbnQKCmRlZmluZSAiSW5pdGlhbCBQb3B1bGF0aW9uIjoKCiAgICAgICAgICAgICJRdWFsaWZ5aW5nIEVuY291bnRlcnMgRHVyaW5nIE1lYXN1cmVtZW50IFBlcmlvZCIgUXVhbGlmeWluZ0VuY291bnRlcgogICAgICAgICAgICAJd2hlcmUgIlBhdGllbnQgQWdlIDE4IG9yIE9sZGVyIGF0IFN0YXJ0IG9mIE1lYXN1cmVtZW50IFBlcmlvZCIKCgpkZWZpbmUgIk51bWVyYXRvciI6CgogICAgICAgICAgICAiTWVkaWNhdGlvbnMgRG9jdW1lbnRlZCBEdXJpbmcgUXVhbGlmeWluZyBFbmNvdW50ZXIiCgoKZGVmaW5lICJEZW5vbWluYXRvciI6CgogICAgICAgICAgICAiSW5pdGlhbCBQb3B1bGF0aW9uIgoKICAgICAgICAgCmRlZmluZSAiRGVub21pbmF0b3IgRXhjZXB0aW9ucyI6CgogICAgICAgICAgICAiUXVhbGlmeWluZyBFbmNvdW50ZXJzIER1cmluZyBNZWFzdXJlbWVudCBQZXJpb2QiIEVuY291bnRlckR1cmluZ01lYXN1cmVtZW50UGVyaW9kCiAgICAgICAgICAgIAl3aXRoICAiTWVkaWNhdGlvbnMgTm90IERvY3VtZW50ZWQgZm9yIE1lZGljYWwgUmVhc29uIiBNZWRpY2F0aW9uc05vdERvY3VtZW50ZWQKICAgICAgICAgICAgCQlzdWNoIHRoYXQgc3RhcnQgb2YgKE1lZGljYXRpb25zTm90RG9jdW1lbnRlZC5wZXJmb3JtZWQgYXMgUGVyaW9kKSBkdXJpbmcgRW5jb3VudGVyRHVyaW5nTWVhc3VyZW1lbnRQZXJpb2QucGVyaW9kCiAKCmRlZmluZSAiTWVkaWNhdGlvbnMgRG9jdW1lbnRlZCBEdXJpbmcgUXVhbGlmeWluZyBFbmNvdW50ZXIiOgoKICAgICAgICAgICAgIlF1YWxpZnlpbmcgRW5jb3VudGVycyBEdXJpbmcgTWVhc3VyZW1lbnQgUGVyaW9kIiBRdWFsaWZ5aW5nRW5jb3VudGVyRHVyaW5nTWVhc3VyZW1lbnRQZXJpb2QKICAgICAgICAgICAgCXdpdGggW1Byb2NlZHVyZTogIkN1cnJlbnQgTWVkaWNhdGlvbnMgRG9jdW1lbnRlZCJdIE1lZGljYXRpb25zRG9jdW1lbnRlZAogICAgICAgICAgICAJCXN1Y2ggdGhhdCAoTWVkaWNhdGlvbnNEb2N1bWVudGVkLnN0YXR1cz0naW4tcHJvZ3Jlc3MnIGFuZCBNZWRpY2F0aW9uc0RvY3VtZW50ZWQuc3RhdHVzPSdjb21wbGV0ZWQnKQogICAgICAgICAgICAJCSAgICBhbmQgKE1lZGljYXRpb25zRG9jdW1lbnRlZC5wZXJmb3JtZWQgYXMgUGVyaW9kKSBkdXJpbmcgUXVhbGlmeWluZ0VuY291bnRlckR1cmluZ01lYXN1cmVtZW50UGVyaW9kLnBlcmlvZAoKICAgICAgICAgCgpkZWZpbmUgIk1lZGljYXRpb25zIE5vdCBEb2N1bWVudGVkIGZvciBNZWRpY2FsIFJlYXNvbiI6CgogICAgICAgICAgICBbUHJvY2VkdXJlOiAiQ3VycmVudCBNZWRpY2F0aW9ucyBEb2N1bWVudGVkIl0gTm90UGVyZm9ybWVkCiAgICAgICAgICAgIAl3aGVyZSAoTm90UGVyZm9ybWVkLnN0YXR1cyE9J2luLXByb2dyZXNzJyBhbmQgTm90UGVyZm9ybWVkLnN0YXR1cyE9J2NvbXBsZXRlZCcpIGFuZCBOb3RQZXJmb3JtZWQuc3RhdHVzUmVhc29uIGluICJNZWRpY2FsIG9yIE90aGVyIHJlYXNvbiBub3QgZG9uZSIKICAgICAgICAgCgpkZWZpbmUgIlBhdGllbnQgQWdlIDE4IG9yIE9sZGVyIGF0IFN0YXJ0IG9mIE1lYXN1cmVtZW50IFBlcmlvZCI6CiAgICAgICAgICAgIAogICAgICAgICBBZ2VJblllYXJzQXQoc3RhcnQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIpID49IDE4CgpkZWZpbmUgIlF1YWxpZnlpbmcgRW5jb3VudGVycyBEdXJpbmcgTWVhc3VyZW1lbnQgUGVyaW9kIjoKCiAgICAgICAgICAgIFtFbmNvdW50ZXI6ICJNZWRpY2F0aW9ucyBFbmNvdW50ZXIgQ29kZSBTZXQiXSBRdWFsaWZ5aW5nRW5jb3VudGVyCiAgICAgICAgICAgIAl3aGVyZSAoUXVhbGlmeWluZ0VuY291bnRlci5zdGF0dXM9J2luLXByb2dyZXNzJyBvciBRdWFsaWZ5aW5nRW5jb3VudGVyLnN0YXR1cz0nZmluaXNoZWQnKQoJCSAgICAgICAgICAgIGFuZCBRdWFsaWZ5aW5nRW5jb3VudGVyLnBlcmlvZCBkdXJpbmcgIk1lYXN1cmVtZW50IFBlcmlvZCIKCmRlZmluZSBmdW5jdGlvbiAiVG9EYXRlIihWYWx1ZSBEYXRlVGltZSApOgoJRGF0ZVRpbWUoeWVhciBmcm9tIFZhbHVlLCBtb250aCBmcm9tIFZhbHVlLCBkYXkgZnJvbSBWYWx1ZSwgMCwgMCwgMCwgMCwgdGltZXpvbmUgZnJvbSBWYWx1ZSkKCgo="
+      }
+    ]
+  }
