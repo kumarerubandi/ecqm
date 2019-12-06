@@ -1,3 +1,5 @@
+library WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescents version '8.1.000'
+
 using FHIR version '4.0.0'
 
 include FHIRHelpers version '4.0.0' called FHIRHelpers
@@ -56,4 +58,50 @@ define "Qualifying Encounter":
 		union [ Encounter: "Preventive Care Services - Group Counseling"]
 		union [ Encounter: "Home Healthcare Services"] ) ValidEncounter
 		where ValidEncounter.period during "Measurement Period"
+		
+define "Pregnancy Diagnosis Which Overlaps Measurement Period":
+	[Condition: "Pregnancy"] Pregnancy
+		where (Pregnancy.onset as Period) overlaps "Measurement Period"
+
+define "Height in Measurement Period":
+	[Observation: "Height"] Height
+		where (Height.effective as Period) during "Measurement Period"
+			and Height.value is not null
+
+define "Denominator Exclusions":
+	"Has Hospice"
+		or exists ( "Pregnancy Diagnosis Which Overlaps Measurement Period" )
+
+define "Numerator 2":
+	exists [Procedure: "Counseling for Nutrition"] NutritionCounseling
+		where (NutritionCounseling.performed as Period) during "Measurement Period"
+
+define "Numerator 3":
+	exists [Procedure: "Counseling for Physical Activity"] ActivityCounseling
+		where (ActivityCounseling.performed as Period) during "Measurement Period"
+
+define "BMI Percentile in Measurement Period":
+	[Observation: "BMI percentile"] BMIPercentile
+		where (BMIPercentile.effective as Period) during "Measurement Period"
+			and BMIPercentile.value is not null
+
+define "Initial Population":
+	AgeInYearsAt(start of "Measurement Period") >= 3 and AgeInYearsAt(start of "Measurement Period") < 17
+
+define "Has Hospice":
+
+            exists ( [Encounter: "Encounter Inpatient"] DischargeHospice
+            		where (DischargeHospice.status='in-progress' or DischargeHospice.status='finished')
+            		    and (( FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to home for hospice care (procedure)"
+            				or FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to healthcare facility for hospice care (procedure)")
+            		        )
+            			and DischargeHospice.period ends during "Measurement Period"
+                )
+            	or exists ( [ServiceRequest: "Hospice care ambulatory"] HospiceOrder
+            			where HospiceOrder.intent= 'order'
+				and FHIRHelpers.ToDateTime(HospiceOrder.authoredOn) during "Measurement Period"
+            	)
+            	or exists ( [Procedure: "Hospice care ambulatory"] HospicePerformed
+            			where (HospicePerformed.performed as Period) overlaps "Measurement Period"
+            	)
 
