@@ -1,0 +1,61 @@
+{
+    "resourceType": "Library",
+    "id": "library-CMS177v8",
+    "meta": {
+      "versionId": "1",
+      "lastUpdated": "2019-08-16T23:03:04.792+00:00",
+      "profile": [
+        "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/library-cqfm"
+      ]
+    },
+    "url": "http://hl7.org/fhir/us/cqfmeasures/Library/library-CMS177v8",
+    "identifier": [
+      {
+        "use": "official",
+        "system": "http://example.org/fhir/cqi/ecqm/Library/Identifier",
+        "value": "CMS177v8"
+      }
+    ],
+    "version": "8.2.000",
+    "name": "ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessment",
+    "title": "Child and Adolescent Major Depressive Disorder MDD Suicide Risk Assessment",
+    "status": "active",
+    "experimental": true,
+    "type": {
+      "coding": [
+        {
+          "system": "http://hl7.org/fhir/library-type",
+          "code": "logic-library"
+        }
+      ] 
+    },
+    "date": "2019-12-03",
+    "publisher": "Health Level 7 International - Clinical Quality Information Work Group",
+    "description": "This library is used as an example in the FHIR Quality Measure Implementation Guide",
+    "approvalDate": "2019-08-03",
+    "lastReviewDate": "2019-08-03",
+    "contact": [
+      {
+        "telecom": [
+          {
+            "system": "url",
+            "value": "http://www.hl7.org/Special/committees/cqi/index.cfm"
+          }
+        ]
+      }
+    ],
+    "relatedArtifact": [
+      {
+        "type": "depends-on"
+      }
+    ],
+    "dataRequirement": [    
+
+    ],
+    "content": [
+      {
+        "contentType": "text/cql",
+        "data": "bGlicmFyeSBDaGlsZGFuZEFkb2xlc2NlbnRNYWpvckRlcHJlc3NpdmVEaXNvcmRlck1ERFN1aWNpZGVSaXNrQXNzZXNzbWVudCB2ZXJzaW9uICc4LjEuMDAwJwoKdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMCcKCmluY2x1ZGUgRkhJUkhlbHBlcnMgdmVyc2lvbiAnNC4wLjAnIGNhbGxlZCBGSElSSGVscGVycwoKY29kZXN5c3RlbSAiSUNELTEwLUNNIjogJ2h0dHA6Ly9obDcub3JnL2ZoaXIvc2lkL2ljZC0xMC1jbScKY29kZXN5c3RlbSAiTE9JTkMiOiAnaHR0cDovL2xvaW5jLm9yZycKY29kZXN5c3RlbSAiSENQQ1MiOiAnaHR0cHM6Ly9oY3Bjcy5jb2Rlcy8nCmNvZGVzeXN0ZW0gIlNOT01FRENUIjogJ2h0dHA6Ly9zbm9tZWQuaW5mby9zY3QnCmNvZGVzeXN0ZW0gIkNQVCI6ICdodHRwczovL3d3dy5hYXBjLmNvbS9yZXNvdXJjZXMvbWVkaWNhbC1jb2RpbmcvY3B0LmFzcHgnCmNvZGVzeXN0ZW0gIk5VQ0NQVCI6J2h0dHBzOi8vd3d3Lm5sbS5uaWguZ292L3Jlc2VhcmNoL3VtbHMvc291cmNlcmVsZWFzZWRvY3MvY3VycmVudC9OVUNDUFQvc291cmNlcmVwcmVzZW50YXRpb24uaHRtbCcKY29kZXN5c3RlbSAiUlhOT1JNIiA6ICdodHRwOi8vd3d3Lm5sbS5uaWguZ292L3Jlc2VhcmNoL3VtbHMvcnhub3JtJwoKdmFsdWVzZXQgIkV0aG5pY2l0eSI6ICd1cm46b2lkOjIuMTYuODQwLjEuMTE0MjIyLjQuMTEuODM3Jwp2YWx1ZXNldCAiR3JvdXAgUHN5Y2hvdGhlcmFweSI6ICd1cm46b2lkOjIuMTYuODQwLjEuMTEzODgzLjMuNTI2LjMuMTE4NycKdmFsdWVzZXQgIk1ham9yIERlcHJlc3NpdmUgRGlzb3JkZXItQWN0aXZlIjogJ3VybjpvaWQ6Mi4xNi44NDAuMS4xMTM4ODMuMy41MjYuMy4xNDkxJwp2YWx1ZXNldCAiT2ZmaWNlIFZpc2l0IjogJ3VybjpvaWQ6Mi4xNi44NDAuMS4xMTM4ODMuMy40NjQuMTAwMy4xMDEuMTIuMTAwMScKdmFsdWVzZXQgIk9OQyBBZG1pbmlzdHJhdGl2ZSBTZXgiOiAndXJuOm9pZDoyLjE2Ljg0MC4xLjExMzc2Mi4xLjQuMScKdmFsdWVzZXQgIk91dHBhdGllbnQgQ29uc3VsdGF0aW9uIjogJ3VybjpvaWQ6Mi4xNi44NDAuMS4xMTM4ODMuMy40NjQuMTAwMy4xMDEuMTIuMTAwOCcKdmFsdWVzZXQgIlBheWVyIjogJ3VybjpvaWQ6Mi4xNi44NDAuMS4xMTQyMjIuNC4xMS4zNTkxJwp2YWx1ZXNldCAiUHN5Y2ggVmlzaXQgLSBEaWFnbm9zdGljIEV2YWx1YXRpb24iOiAndXJuOm9pZDoyLjE2Ljg0MC4xLjExMzg4My4zLjUyNi4zLjE0OTInCnZhbHVlc2V0ICJQc3ljaCBWaXNpdCAtIEZhbWlseSBQc3ljaG90aGVyYXB5IjogJ3VybjpvaWQ6Mi4xNi44NDAuMS4xMTM4ODMuMy41MjYuMy4xMDE4Jwp2YWx1ZXNldCAiUHN5Y2ggVmlzaXQgLSBQc3ljaG90aGVyYXB5IjogJ3VybjpvaWQ6Mi4xNi44NDAuMS4xMTM4ODMuMy41MjYuMy4xNDk2Jwp2YWx1ZXNldCAiUHN5Y2hvYW5hbHlzaXMiOiAndXJuOm9pZDoyLjE2Ljg0MC4xLjExMzg4My4zLjUyNi4zLjExNDEnCnZhbHVlc2V0ICJSYWNlIjogJ3VybjpvaWQ6Mi4xNi44NDAuMS4xMTQyMjIuNC4xMS44MzYnCnZhbHVlc2V0ICJUZWxlaGVhbHRoIFNlcnZpY2VzIjogJ3VybjpvaWQ6Mi4xNi44NDAuMS4xMTM4ODMuMy40NjQuMTAwMy4xMDEuMTIuMTAzMScKCmNvZGUgIkJpcnRoIGRhdGUiOiAnMjExMTItOCcgZnJvbSAiTE9JTkMiIGRpc3BsYXkgJ0JpcnRoIGRhdGUnCmNvZGUgIlN1aWNpZGUgcmlzayBhc3Nlc3NtZW50IChwcm9jZWR1cmUpIjogJzIyNTMzNzAwOScgZnJvbSAiU05PTUVEQ1QiIGRpc3BsYXkgJ1N1aWNpZGUgcmlzayBhc3Nlc3NtZW50IChwcm9jZWR1cmUpJwoKcGFyYW1ldGVyICJNZWFzdXJlbWVudCBQZXJpb2QiIEludGVydmFsPERhdGVUaW1lPgoKY29udGV4dCBQYXRpZW50CgpkZWZpbmUgIkRlbm9taW5hdG9yIjoKCSJJbml0aWFsIFBvcHVsYXRpb24iCgpkZWZpbmUgIk1ham9yIERlcHJlc3NpdmUgRGlzb3JkZXIgRW5jb3VudGVyIjoKCSggW0VuY291bnRlcjogIk9mZmljZSBWaXNpdCJdCgkJdW5pb24gW0VuY291bnRlcjogIk91dHBhdGllbnQgQ29uc3VsdGF0aW9uIl0KCQl1bmlvbiBbRW5jb3VudGVyOiAiUHN5Y2ggVmlzaXQgLSBEaWFnbm9zdGljIEV2YWx1YXRpb24iXQoJCXVuaW9uIFtFbmNvdW50ZXI6ICJQc3ljaCBWaXNpdCAtIEZhbWlseSBQc3ljaG90aGVyYXB5Il0KCQl1bmlvbiBbRW5jb3VudGVyOiAiUHN5Y2ggVmlzaXQgLSBQc3ljaG90aGVyYXB5Il0KCQl1bmlvbiBbRW5jb3VudGVyOiAiUHN5Y2hvYW5hbHlzaXMiXQoJCXVuaW9uIFtFbmNvdW50ZXI6ICJHcm91cCBQc3ljaG90aGVyYXB5Il0KCQl1bmlvbiBbRW5jb3VudGVyOiAiVGVsZWhlYWx0aCBTZXJ2aWNlcyJdICkgVmFsaWRFbmNvdW50ZXIKCQl3aGVyZSAiRW5jb3VudGVyRGlhZ25vc2lzIihWYWxpZEVuY291bnRlcikKCQkJYW5kIChWYWxpZEVuY291bnRlci5zdGF0dXM9J2luLXByb2dyZXNzJyBvciBWYWxpZEVuY291bnRlci5zdGF0dXM9J2ZpbmlzaGVkJykKCQkgICAgYW5kIFZhbGlkRW5jb3VudGVyLnBlcmlvZCBkdXJpbmcgIk1lYXN1cmVtZW50IFBlcmlvZCIKCmRlZmluZSAiTnVtZXJhdG9yIjoKCSJNYWpvciBEZXByZXNzaXZlIERpc29yZGVyIEVuY291bnRlciIgTURERW5jb3VudGVyCgkJd2l0aCBbUHJvY2VkdXJlOiAiU3VpY2lkZSByaXNrIGFzc2Vzc21lbnQgKHByb2NlZHVyZSkiXSBTdWljaWRlUmlza0Fzc2Vzc21lbnQKCQkJc3VjaCB0aGF0IChTdWljaWRlUmlza0Fzc2Vzc21lbnQucGVyZm9ybWVkIGFzIFBlcmlvZCkgZHVyaW5nIE1EREVuY291bnRlci5wZXJpb2QKCmRlZmluZSAiSW5pdGlhbCBQb3B1bGF0aW9uIjoKCSJNYWpvciBEZXByZXNzaXZlIERpc29yZGVyIEVuY291bnRlciIgTURERW5jb3VudGVyCgkJd2hlcmUgQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKT49IDYKCQkJCWFuZCBBZ2VJblllYXJzQXQoc3RhcnQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIpPCAxNwoKZGVmaW5lIGZ1bmN0aW9uICJFbmNvdW50ZXJEaWFnbm9zaXMiKFZhbGlkRW5jb3VudGVyIEVuY291bnRlcik6CglleGlzdHMoc2luZ2xldG9uIGZyb20gKFZhbGlkRW5jb3VudGVyLmRpYWdub3NpcyBFbmNvdW50ZXJEaWFnbm9zaXMKCQkJCXdoZXJlIGV4aXN0cyhzaW5nbGV0b24gZnJvbSAoRW5jb3VudGVyRGlhZ25vc2lzLmNvbmRpdGlvbiBjIHdoZXJlIGMucmVmZXJlbmNlLnZhbHVlPSdDb25kaXRpb24vJysoIkdldENvbmRpdGlvbiIpLmlkLnZhbHVlKSkKCQkJKQoJKQoKZGVmaW5lICJHZXRDb25kaXRpb24iOgoJc2luZ2xldG9uIGZyb20gKFtDb25kaXRpb246Ik1ham9yIERlcHJlc3NpdmUgRGlzb3JkZXItQWN0aXZlIl1DIHdoZXJlIEMuY2xpbmljYWxTdGF0dXMuY29kaW5nWzBdLmNvZGU9J2FjdGl2ZScp"
+      }
+    ]
+  }
