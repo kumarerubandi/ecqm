@@ -50,6 +50,91 @@
       }
     ],
     "dataRequirement": [    
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001"
+          }
+        ]
+      }, 
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1492"
+          }
+        ]
+      }, 
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1010"
+          }
+        ]
+      }, 
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1008"
+          }
+        ]
+      }, 
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1496"
+          }
+        ]
+      }, 
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1141"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1031"
+          }
+        ]
+      }, 
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "code":[
+              {
+                "code":"225337009"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1491"
+          }
+        ]
+      }
 
     ],
     "content": [

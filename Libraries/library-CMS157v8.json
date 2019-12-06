@@ -49,7 +49,52 @@
         "type": "depends-on"
       }
     ],
-    "dataRequirement": [    
+    "dataRequirement": [  
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1026"
+          }
+        ]
+      },  
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1010"
+          }
+        ]
+      }, 
+      {
+        "type": "Observation",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1028"
+          }
+        ]
+      }, 
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001"
+          }
+        ]
+      }, 
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1027"
+          }
+        ]
+      }
 
     ],
     "content": [

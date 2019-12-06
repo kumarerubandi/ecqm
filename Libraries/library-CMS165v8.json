@@ -50,6 +50,204 @@
       }
     ],
     "dataRequirement": [    
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.378"
+          }
+        ]
+      }, 
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.353"
+          }
+        ]
+      }, 
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.109.12.1029"
+          }
+        ]
+      }, 
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1002"
+          }
+        ]
+      }, 
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.109.12.1014"
+          }
+        ]
+      }, 
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.109.12.1011"
+          }
+        ]
+      }, 
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.109.12.1012"
+          }
+        ]
+      }, 
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.109.12.1013"
+          }
+        ]
+      }, 
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.104.12.1011"
+          }
+        ]
+      }, 
+      {
+        "type": "Observation",
+        "codeFilter": [
+          {
+            "path": "code",
+            "code":[
+              {
+                "code":"8462-4"
+              }
+            ]
+          }
+        ]
+      }, 
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.666.5.307"
+          }
+        ]
+      }, 
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1085"
+          }
+        ]
+      }, 
+      {
+        "type": "Observation",
+        "codeFilter": [
+          {
+            "path": "code",
+            "code":[
+              {
+                "code":"8480-6"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.666.5.307"
+          }
+        ]
+      },
+      {
+        "type": "ServiceRequest",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1108.15"
+          }
+        ]
+      },
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1108.15"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.1240"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1025"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1023"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1016"
+          }
+        ]
+      }
+      
 
     ],
     "content": [

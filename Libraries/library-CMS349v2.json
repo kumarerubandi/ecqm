@@ -50,7 +50,80 @@
       }
     ],
     "dataRequirement": [    
-
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1022"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1023"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1024"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1025"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1056.54"
+          }
+        ]
+      },
+      {
+        "type": "Observation",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1056.50"
+          }
+        ]
+      },
+      {
+        "type": "Observation",
+        "codeFilter": [
+          {
+            "path": "code",
+            "code":[{
+              "code":"75622-1"
+            }]
+          }
+        ]
+      }
     ],
     "content": [
       {

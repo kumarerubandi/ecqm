@@ -1,6 +1,6 @@
 {
     "resourceType": "Library",
-    "id": "library-CMS153",
+    "id": "library-CMS153v8",
     "meta": {
       "versionId": "1",
       "lastUpdated": "2019-08-16T23:03:04.792+00:00",
@@ -8,12 +8,12 @@
         "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/library-cqfm"
       ]
     },
-    "url": "http://hl7.org/fhir/us/cqfmeasures/Library/library-CMS153",
+    "url": "http://hl7.org/fhir/us/cqfmeasures/Library/library-CMS153v8",
     "identifier": [
       {
         "use": "official",
         "system": "http://example.org/fhir/cqi/ecqm/Library/Identifier",
-        "value": "CMS153"
+        "value": "CMS153v8"
       }
     ],
     "version": "8.2.000",

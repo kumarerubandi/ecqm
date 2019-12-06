@@ -50,7 +50,330 @@
       }
     ],
     "dataRequirement": [    
-
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.403"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.44"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.21"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.46"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.47"
+          }
+        ]
+      },
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1045.67"
+          }
+        ]
+      },
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.666.5.694"
+          }
+        ]
+      },
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.117.1.7.1.204"
+          }
+        ]
+      },
+      {
+        "type": "MedicationAdministration",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.107"
+          }
+        ]
+      },
+      {
+        "type": "MedicationAdministration",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.98"
+          }
+        ]
+      },
+      {
+        "type": "MedicationAdministration",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.97"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.2.1363"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.11.1040"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.9"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.11.1125"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1030"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1026"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.101.11.1115"
+          }
+        ]
+      },
+      {
+        "type": "Encounter",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.600.1.1575"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.600.1.1623"
+          }
+        ]
+      },
+      {
+        "type": "MedicationRequest",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.107"
+          }
+        ]
+      },
+      {
+        "type": "MedicationRequest",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.98"
+          }
+        ]
+      },
+      {
+        "type": "MedicationRequest",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.97"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.73"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.526.3.353"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.110.12.1024"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.67.1.101.1.269"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.100"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.42"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1047.102"
+          }
+        ]
+      },
+      {
+        "type": "Observation",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.117.1.7.1.215"
+          }
+        ]
+      },
+      {
+        "type": "Procedure",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.600.1.1579"
+          }
+        ]
+      },
+      {
+        "type": "Condition",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113883.3.464.1003.103.12.1001"
+          }
+        ]
+      },
+      {
+        "type": "AdverseEvent",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1110.42"
+          }
+        ]
+      },
+      {
+        "type": "AllergyIntolerance",
+        "codeFilter": [
+          {
+            "path": "code",
+            "valueSet": "urn:oid:2.16.840.1.113762.1.4.1110.42"
+          }
+        ]
+      }
     ],
     "content": [
       {
