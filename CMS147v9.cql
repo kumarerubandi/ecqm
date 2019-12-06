@@ -175,7 +175,7 @@ define "Medical Patient or System Reason for Not Administering Influenza Vaccine
 define "Influenza Vaccine Previously Received":
 	[Observation: "Previous Receipt of Influenza Vaccine"] PreviousReceiptFluVaccine
 		where (PreviousReceiptFluVaccine.status = 'final' or PreviousReceiptFluVaccine.status = 'amended' or PreviousReceiptFluVaccine.status = 'corrected')
-			and start of (PreviousReceiptFluVaccine.effective as Period) during "Influenza Season Including August and September of the Prior Year"
+			and FHIRHelpers.ToDateTime(PreviousReceiptFluVaccine.issued) during "Influenza Season Including August and September of the Prior Year"
 
 define "Numerator":
 	exists "Influenza Vaccination Procedure"

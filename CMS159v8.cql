@@ -39,8 +39,8 @@ context Patient
 define "Numerator":
 	FHIRHelpers.ToInteger(Last([Observation: "PHQ 9 and PHQ 9M Tools"] DepressionAssessment
 			where (DepressionAssessment.status = 'final' or DepressionAssessment.status = 'amended' or DepressionAssessment.status = 'corrected')
-					and "ToDate"(start of (DepressionAssessment.effective as Period))in "Follow-Up Assessment Period"
-			sort by start of (effective as Period)
+					and "ToDate"(FHIRHelpers.ToDateTime(DepressionAssessment.issued))in "Follow-Up Assessment Period"
+			sort by FHIRHelpers.ToDateTime(issued)
 	).value) < 5
 
 define "Denominator Identification Period":
@@ -55,7 +55,7 @@ define "Denominator":
 
 define "Follow-Up Assessment Period":
 	"Index Depression Assessment" FirstIndexAssessment
-		return Interval["ToDate"(start of (FirstIndexAssessment.effective as Period))+ 12 months - 60 days, "ToDate"(start of (FirstIndexAssessment.effective as Period))+ 12 months + 60 days]
+		return Interval["ToDate"(FHIRHelpers.ToDateTime(FirstIndexAssessment.issued))+ 12 months - 60 days, "ToDate"(FHIRHelpers.ToDateTime(FirstIndexAssessment.issued))+ 12 months + 60 days]
 
 define "Disorder Diagnoses":
 	( [Condition: "Bipolar Disorder"]
@@ -89,10 +89,10 @@ define "Depression Encounter":
 define "Index Depression Assessment":
 	First("Depression Assessments Greater than 9" DepressionAssessment
 			with "Depression Encounter" DepressionEncounter
-				such that start of (DepressionAssessment.effective as Period) is not null
-					and start of (DepressionAssessment.effective as Period) in Interval["ToDate"((start of DepressionEncounter.period)- 7 days),
+				such that FHIRHelpers.ToDateTime(DepressionAssessment.issued) is not null
+					and FHIRHelpers.ToDateTime(DepressionAssessment.issued) in Interval["ToDate"((start of DepressionEncounter.period)- 7 days),
 					end of DepressionEncounter.period]
-			sort by (start of (effective as Period))
+			sort by FHIRHelpers.ToDateTime(issued)
 	)
 
 define "Depression Assessments Greater than 9":
@@ -114,18 +114,18 @@ define "Denominator Exclusions":
 
 define "Stratification 1":
 	"Index Depression Assessment" IndexAssessment
-			where AgeInYearsAt(start of (IndexAssessment.effective as Period))>= 12
-				and AgeInYearsAt(start of (IndexAssessment.effective as Period))< 18
+			where AgeInYearsAt(FHIRHelpers.ToDateTime(IndexAssessment.issued))>= 12
+				and AgeInYearsAt(FHIRHelpers.ToDateTime(IndexAssessment.issued))< 18
 				and "Index Depression Assessment" is not null
 
 define "Stratification 2":
 	"Index Depression Assessment" IndexAssessment
-			where AgeInYearsAt(start of (IndexAssessment.effective as Period))>= 18
+			where AgeInYearsAt(FHIRHelpers.ToDateTime(IndexAssessment.issued))>= 18
 				and "Index Depression Assessment" is not null
 
 define "Initial Population":
 	exists ( "Index Depression Assessment" IndexAssessment
-				where AgeInYearsAt(start of (IndexAssessment.effective as Period))>= 12
+				where AgeInYearsAt(FHIRHelpers.ToDateTime(IndexAssessment.issued))>= 12
 					and "Index Depression Assessment" is not null
 	)
 

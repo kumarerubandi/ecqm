@@ -38,14 +38,14 @@ context Patient
 define "Patient Reason for Not Performing Assessment of Cognition Using Standardized Tools":
 	[Observation: "Standardized Tools for Assessment of Cognition"] NoCognitiveAssessmentUsingTools
 		with "Dementia Encounter" EncounterDementia
-			such that start of (NoCognitiveAssessmentUsingTools.effective as Period) during EncounterDementia.period
+			such that FHIRHelpers.ToDateTime(NoCognitiveAssessmentUsingTools.issued) during EncounterDementia.period
 		where (NoCognitiveAssessmentUsingTools.status = 'cancelled' or NoCognitiveAssessmentUsingTools.status = 'entered-in-error')
 					and NoCognitiveAssessmentUsingTools.dataAbsentReason in "Patient Reason"
 
 define "Assessment of Cognition Using Standardized Tools":
 	[Observation: "Standardized Tools for Assessment of Cognition"] CognitiveAssessmentUsingTools
 		with "Dementia Encounter" EncounterDementia
-			such that start of (CognitiveAssessmentUsingTools.effective as Period) 12 months or less on or before day of
+			such that FHIRHelpers.ToDateTime(CognitiveAssessmentUsingTools.issued) 12 months or less on or before day of
 			end of EncounterDementia.period
 		where CognitiveAssessmentUsingTools.value is not null
 

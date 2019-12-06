@@ -75,14 +75,14 @@ define "No BMI Due to Patient Refusal":
 		with "Qualifying Encounters During the Measurement Period" QualifyingEncounter
 			such that (NoBMI.status = 'cancelled' or NoBMI.status = 'entered-in-error')
 					and NoBMI.dataAbsentReason in "Patient Reason refused"
-				and start of (NoBMI.effective as Period) during QualifyingEncounter.period
+				and FHIRHelpers.ToDateTime(NoBMI.issued) during QualifyingEncounter.period
 
 define "Has High BMI with Follow Up":
 	FHIRHelpers.ToInteger(Last([Observation: "Body mass index (BMI) [Ratio]"] LastBMI
 			with "High BMI Follow Up Encounters" HighBMIEncounter
 				such that (LastBMI.effective as Period) starts 12 months or less on or before
 				end of HighBMIEncounter.period
-			sort by start of (effective as Period)
+			sort by FHIRHelpers.ToDateTime(issued)
 	).value) >= 25 'kg/m2'
 
 define "Has Low BMI with Follow Up":
@@ -90,7 +90,7 @@ define "Has Low BMI with Follow Up":
 			with "Low BMI Follow Up Encounters" LowBMIEncounter
 				such that (LastBMI.effective as Period) starts 12 months or less on or before
 				end of LowBMIEncounter.period
-			sort by start of (effective as Period)
+			sort by FHIRHelpers.ToDateTime(issued)
 	).value) < 18.5 'kg/m2'
 
 define "No BMI Due to Medical Reason":
@@ -98,7 +98,7 @@ define "No BMI Due to Medical Reason":
 		with "Qualifying Encounters During the Measurement Period" QualifyingEncounter
 			such that (NoBMI.status = 'cancelled' or NoBMI.status = 'entered-in-error')
 					and NoBMI.dataAbsentReason in "Medical or Other reason not done"
-				and start of (NoBMI.effective as Period) 12 months or less on or before day of start of QualifyingEncounter.period
+				and FHIRHelpers.ToDateTime(NoBMI.issued) 12 months or less on or before day of start of QualifyingEncounter.period
 
 define "No BMI Referral Due to Medical Reason":
 	[ServiceRequest: "Referrals where weight assessment may occur"] NoReferral
@@ -131,7 +131,7 @@ define "Most Recent Documented BMI":
 						or (LastBMI.effective as Period) starts during QualifyingEncounter.period
 				)
 					and LastBMI.value is not null
-			sort by start of (effective as Period)
+			sort by FHIRHelpers.ToDateTime(issued)
 	)
 
 define "Initial Population":
