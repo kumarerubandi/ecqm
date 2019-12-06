@@ -47,7 +47,7 @@ define "Denominator":
 define "Numerator":
 	exists [Observation: "Falls Screening"] FallsScreen
 		where (FallsScreen.status = 'final' or FallsScreen.status = 'amended' or FallsScreen.status = 'corrected')
-			and start of (FallsScreen.effective as Period) during "Measurement Period"
+			and FHIRHelpers.ToDateTime(FallsScreen.issued) during "Measurement Period"
 
 define "Qualifying Encounter":
 	( [Encounter: "Office Visit"]
@@ -67,7 +67,7 @@ define "Qualifying Encounter":
 define "Ambulatory Status Assessment During Measurement Period":
 	[Observation: "Ambulatory Status"] AmbulatoryStatusAssessment
 		where (AmbulatoryStatusAssessment.status = 'final' or AmbulatoryStatusAssessment.status = 'amended' or AmbulatoryStatusAssessment.status = 'corrected')
-			and start of (AmbulatoryStatusAssessment.effective as Period) during "Measurement Period"
+			and FHIRHelpers.ToDateTime(AmbulatoryStatusAssessment.issued) during "Measurement Period"
 			and AmbulatoryStatusAssessment.value is not null
 
 define "Assessed as Not Ambulatory During Measurement Period":
@@ -78,8 +78,8 @@ define "Assessed as Not Ambulatory During Measurement Period":
 define "Assessed as Not Ambulatory Prior to Measurement Period":
 	Last([Observation: "Ambulatory Status"] PriorAmbulatoryStatus
 			where (PriorAmbulatoryStatus.status = 'final' or PriorAmbulatoryStatus.status = 'amended' or PriorAmbulatoryStatus.status = 'corrected')
-			and start of (PriorAmbulatoryStatus.effective as Period) before start "Measurement Period"
-			sort by start of (effective as Period)
+			and FHIRHelpers.ToDateTime(PriorAmbulatoryStatus.issued) before start "Measurement Period"
+			sort by FHIRHelpers.ToDateTime(issued)
 	).value in "Patient not ambulatory"
 
 define "Denominator Exclusions":

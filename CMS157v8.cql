@@ -47,7 +47,7 @@ define "Numerator 2":
 	"Radiation Treatment with Cancer Diagnosis" RadiationTherapy
 		with [Observation: "Standardized Pain Assessment Tool"] PainAssessed
 			such that (PainAssessed.status = 'final' or PainAssessed.status = 'amended' or PainAssessed.status = 'corrected')
-					and start of (PainAssessed.effective as Period) during (RadiationTherapy.performed as Period)
+					and FHIRHelpers.ToDateTime(PainAssessed.issued) during (RadiationTherapy.performed as Period)
 				and PainAssessed.value is not null
 
 define "Initial Population 2":
@@ -57,7 +57,7 @@ define "Numerator 1":
 	"Face to Face Encounter with Ongoing Chemotherapy" FaceToFaceEncounterWithChemo
 		with [Observation: "Standardized Pain Assessment Tool"] PainAssessed
 			such that (PainAssessed.status = 'final' or PainAssessed.status = 'amended' or PainAssessed.status = 'corrected')
-					and start of (PainAssessed.effective as Period) during FaceToFaceEncounterWithChemo.period
+					and FHIRHelpers.ToDateTime(PainAssessed.issued) during FaceToFaceEncounterWithChemo.period
 				and PainAssessed.value is not null
 
 define "Initial Population 1":

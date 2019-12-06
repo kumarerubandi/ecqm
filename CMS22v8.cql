@@ -84,7 +84,7 @@ define "No Blood Pressure Screen Due to Medical Reason or Patient Refusal":
 			such that ( NoBPScreen.dataAbsentReason in "Medical or Other reason not done"
 					or NoBPScreen.dataAbsentReason in "Patient Reason refused"
 			)
-				and start of (NoBPScreen.effective as Period) same day as start of QualifyingEncounter.period
+				and FHIRHelpers.ToDateTime(FallsScreen.issued) same day as start of QualifyingEncounter.period
 
 define "Patients Age 18 Years and Older at Start of Measurement Period":
 	AgeInYearsAt(start of "Measurement Period")>= 18

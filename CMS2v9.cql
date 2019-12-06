@@ -66,7 +66,7 @@ define "Has No Adult Depression Screening Due to Medical Reason":
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that (ScreeningNotPerfomedAdult.status='cancelled' or ScreeningNotPerfomedAdult.status='entered-in-error')
 					and ScreeningNotPerfomedAdult.dataAbsentReason in "Medical or Other reason not done"
-					and start of (ScreeningNotPerfomedAdult.effective as Period) during QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(ScreeningNotPerfomedAdult.issued) during QualifyingEncounter.period
 	)
 
 define "Has Diagnosis of Bipolar Starting Before Qualifying Encounter":
@@ -124,7 +124,7 @@ define "Has Adolescent Depression Screening":
 	exists ( [Observation: "Adolescent depression screening assessment"] AdolescentScreening
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that (AdolescentScreening.status = 'final' or AdolescentScreening.status = 'amended' or AdolescentScreening.status = 'corrected')
-					and start of (AdolescentScreening.effective as Period) 14 days or less before or on day of start of QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(AdolescentScreening.issued) 14 days or less before or on day of start of QualifyingEncounter.period
 					and AdolescentScreening.value is not null
 	)
 
@@ -132,7 +132,7 @@ define "Has Adult Depression Screening":
 	exists ( [Observation: "Adult depression screening assessment"] AdultScreening
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that (AdultScreening.status = 'final' or AdultScreening.status = 'amended' or AdultScreening.status = 'corrected')
-					and start of (AdultScreening.effective as Period) 14 days or less before or on day of start of QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(AdultScreening.issued) 14 days or less before or on day of start of QualifyingEncounter.period
 					and AdultScreening.value is not null
 	)
 
@@ -140,18 +140,18 @@ define "Most Recent Adolescent Depression Screening":
 	Last([Observation: "Adolescent depression screening assessment"] LastAdolescentScreen
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that (LastAdolescentScreen.status = 'final' or LastAdolescentScreen.status = 'amended' or LastAdolescentScreen.status = 'corrected')
-					and start of (LastAdolescentScreen.effective as Period) 14 days or less before or on day of start of QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(LastAdolescentScreen.issued) 14 days or less before or on day of start of QualifyingEncounter.period
 					and LastAdolescentScreen.value is not null
-			sort by end of (effective as Period)
+			sort by FHIRHelpers.ToDateTime(issued)
 	)
 
 define "Most Recent Adult Depression Screening":
 	Last([Observation: "Adult depression screening assessment"] LastAdultScreen
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that (LastAdultScreen.status = 'final' or LastAdultScreen.status = 'amended' or LastAdultScreen.status = 'corrected')
-					and start of (LastAdultScreen.effective as Period) 14 days or less before or on day of start of QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(LastAdultScreen.issued) 14 days or less before or on day of start of QualifyingEncounter.period
 					and LastAdultScreen.value is not null
-			sort by end of (effective as Period)
+			sort by FHIRHelpers.ToDateTime(issued)
 	)
 
 define "Has No Adolescent Depression Screening Due to Patient Reason":
@@ -159,7 +159,7 @@ define "Has No Adolescent Depression Screening Due to Patient Reason":
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that (ScreeningNotPerformedAdolescent.status = 'cancelled' or ScreeningNotPerformedAdolescent.status = 'entered-in-error')
 					and ScreeningNotPerformedAdolescent.dataAbsentReason in "Patient Reason refused"
-					and start of (ScreeningNotPerformedAdolescent.effective as Period) during QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(ScreeningNotPerformedAdolescent.issued) during QualifyingEncounter.period
 	)
 
 define "Has No Adult Depression Screening Due to Patient Reason":
@@ -167,7 +167,7 @@ define "Has No Adult Depression Screening Due to Patient Reason":
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that (ScreeningNotPerformedAdult.status = 'cancelled' or ScreeningNotPerformedAdult.status = 'entered-in-error')
 					and ScreeningNotPerformedAdult.dataAbsentReason in "Patient Reason refused"
-					and start of (ScreeningNotPerformedAdult.effective as Period) during QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(ScreeningNotPerformedAdult.issued) during QualifyingEncounter.period
 	)
 
 define "Denominator Exceptions":
@@ -194,12 +194,12 @@ define "Patient Age 18 Years or Older at Start of Measurement Period":
 define "Encounter Associated with Most Recent Positive Adolescent Depression Screening":
 	"Qualifying Encounter for Depression Screening" QualifyingEncounter
 		with "Most Recent Adolescent Depression Screening Positive" AdolescentScreening
-			such that start of (AdolescentScreening.effective as Period) 14 days or less before or on day of start of QualifyingEncounter.period
+			such that FHIRHelpers.ToDateTime(AdolescentScreening.issued) 14 days or less before or on day of start of QualifyingEncounter.period
 
 define "Encounter Associated with Most Recent Positive Adult Depression Screening":
 	"Qualifying Encounter for Depression Screening" QualifyingEncounter
 		with "Most Recent Adult Depression Screening Positive" AdultScreening
-			such that start of (AdultScreening.effective as Period) 14 days or less before or on day of start of QualifyingEncounter.period
+			such that FHIRHelpers.ToDateTime(AdultScreening.issued) 14 days or less before or on day of start of QualifyingEncounter.period
 
 define "Additional Evaluation for Depression as Follow Up for Adolescent":
 	[Procedure: "Additional evaluation for depression - adolescent"] AdditionalEvalAdolescent
@@ -239,13 +239,13 @@ define "Suicide Assessment as Follow Up for Adolescent":
 	[Observation: "Suicide Risk Assessment"] AssessSuicideRisk
 		with "Encounter Associated with Most Recent Positive Adolescent Depression Screening" PositiveAdolescentScreenEncounter
 			such that (AssessSuicideRisk.status = 'final' or AssessSuicideRisk.status = 'amended' or AssessSuicideRisk.status = 'corrected')
-				and start of (AssessSuicideRisk.effective as Period) same day as start of PositiveAdolescentScreenEncounter.period
+				and FHIRHelpers.ToDateTime(AssessSuicideRisk.issued) same day as start of PositiveAdolescentScreenEncounter.period
 
 define "Suicide Assessment as Follow Up for Adult":
 	[Observation: "Suicide Risk Assessment"] AssessSuicideRisk
 		with "Encounter Associated with Most Recent Positive Adult Depression Screening" PositiveAdultScreenEncounter
 			such that (AssessSuicideRisk.status = 'final' or AssessSuicideRisk.status = 'amended' or AssessSuicideRisk.status = 'corrected')
-				and start of (AssessSuicideRisk.effective as Period) same day as start of PositiveAdultScreenEncounter.period
+				and FHIRHelpers.ToDateTime(AssessSuicideRisk.issued) same day as start of PositiveAdultScreenEncounter.period
 
 define "Recommended Follow up for Positive Adolescent Depression Screen":
 	[Procedure: "Follow-up for depression - adolescent"] FollowupAdolescent
@@ -262,5 +262,5 @@ define "Has No Adolescent Depression Screening Due to Medical Reason":
 			with "Qualifying Encounter for Depression Screening" QualifyingEncounter
 				such that (ScreeningNotPerformedAdolescent.status = 'cancelled' or ScreeningNotPerformedAdolescent.status = 'entered-in-error')
 					and ScreeningNotPerformedAdolescent.dataAbsentReason in "Medical or Other reason not done"
-					and start of (ScreeningNotPerformedAdolescent.effective as Period) during QualifyingEncounter.period
+					and FHIRHelpers.ToDateTime(ScreeningNotPerformedAdolescent.issued) during QualifyingEncounter.period
 	)

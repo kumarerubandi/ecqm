@@ -74,19 +74,19 @@ define "KOOS Total Assessment Scores":
 	[Observation: "Quality of life score [KOOS]"] KOOSLifeQuality
 		with [Observation: "Sport-recreation score [KOOS]"] KOOSSport
 			such that (KOOSSport.status = 'final' or KOOSSport.status = 'amended' or KOOSSport.status = 'corrected')
-					and start of (KOOSLifeQuality.effective as Period) same day as start of (KOOSSport.effective as Period)
+					and FHIRHelpers.ToDateTime(KOOSLifeQuality.issued) same day as FHIRHelpers.ToDateTime(KOOSSport.issued)
 				and KOOSSport.value is not null
 		with [Observation: "Activities of daily living score [KOOS]"] KOOSActivityScore
 			such that (KOOSActivityScore.status = 'final' or KOOSActivityScore.status = 'amended' or KOOSActivityScore.status = 'corrected')
-					and start of (KOOSLifeQuality.effective as Period) same day as start of (KOOSActivityScore.effective as Period)
+					and FHIRHelpers.ToDateTime(KOOSLifeQuality.issued) same day as FHIRHelpers.ToDateTime(KOOSActivityScore.issued)
 				and KOOSActivityScore.value is not null
 		with [Observation: "Symptoms score [KOOS]"] KOOSSymptoms
 			such that (KOOSSymptoms.status = 'final' or KOOSSymptoms.status = 'amended' or KOOSSymptoms.status = 'corrected')
-					and start of (KOOSLifeQuality.effective as Period) same day as start of (KOOSSymptoms.effective as Period)
+					and FHIRHelpers.ToDateTime(KOOSLifeQuality.issued) same day as FHIRHelpers.ToDateTime(KOOSSymptoms.issued)
 				and KOOSSymptoms.value is not null
 		with [Observation: "Pain score [KOOS]"] KOOSPain
 			such that (KOOSPain.status = 'final' or KOOSPain.status = 'amended' or KOOSPain.status = 'corrected')
-					and start of (KOOSLifeQuality.effective as Period) same day as start of (KOOSPain.effective as Period)
+					and FHIRHelpers.ToDateTime(KOOSLifeQuality.issued) same day as FHIRHelpers.ToDateTime(KOOSPain.issued)
 				and KOOSPain.value is not null
 		where (KOOSLifeQuality.status = 'final' or KOOSLifeQuality.status = 'amended' or KOOSLifeQuality.status = 'corrected')
 					and KOOSLifeQuality.value is not null
@@ -95,7 +95,7 @@ define "PROMIS10 Total Assessment Scores":
 	[Observation: "PROMIS-10 Global Mental Health (GMH) score T-score"] Promis10MentalScore
 		with [Observation: "PROMIS-10 Global Physical Health (GPH) score T-score"] Promis10PhysicalScore
 			such that (Promis10PhysicalScore.status = 'final' or Promis10PhysicalScore.status = 'amended' or Promis10PhysicalScore.status = 'corrected')
-					and start of (Promis10MentalScore.effective as Period) same day as start of (Promis10PhysicalScore.effective as Period)
+					and FHIRHelpers.ToDateTime(Promis10MentalScore.issued) same day as FHIRHelpers.ToDateTime(Promis10PhysicalScore.issued)
 				and Promis10PhysicalScore.value is not null
 		where (Promis10MentalScore.status = 'final' or Promis10MentalScore.status = 'amended' or Promis10MentalScore.status = 'corrected')
 					and Promis10MentalScore.value is not null
@@ -116,18 +116,18 @@ define "Qualifying Encounters":
 define "Assessed Initial and Follow up KOOS with TKA":
 	"Total Knee Arthroplasty Procedure" TotalKnee
 		with "KOOS Total Assessment Scores" InitialKneeAssessmentKOOS
-			such that start of (InitialKneeAssessmentKOOS.effective as Period) 90 days or less on or before start of (TotalKnee.performed as Period)
+			such that FHIRHelpers.ToDateTime(InitialKneeAssessmentKOOS.issued) 90 days or less on or before start of (TotalKnee.performed as Period)
 		with "KOOS Total Assessment Scores" FollowupKneeAssessmentKOOS
-			such that start of (FollowupKneeAssessmentKOOS.effective as Period) between
+			such that FHIRHelpers.ToDateTime(FollowupKneeAssessmentKOOS.issued) between
 			end of (TotalKnee.performed as Period) + 270 days and
 			end of (TotalKnee.performed as Period) + 365 days
 
 define "Assessed Initial and Follow up KOOSJr with TKA":
 	"Total Knee Arthroplasty Procedure" TotalKnee
 		with "KOOSJr Total Assessment Scores" InitialKneeAssessmentKOOSJr
-			such that start of (InitialKneeAssessmentKOOSJr.effective as Period) 90 days or less on or before start of (TotalKnee.performed as Period)
+			such that FHIRHelpers.ToDateTime(InitialKneeAssessmentKOOSJr.issued) 90 days or less on or before start of (TotalKnee.performed as Period)
 		with "KOOSJr Total Assessment Scores" FollowupKneeAssessmentKOOSJr
-			such that start of (FollowupKneeAssessmentKOOSJr.effective as Period) between
+			such that FHIRHelpers.ToDateTime(FollowupKneeAssessmentKOOSJr.issued) between
 			end of (TotalKnee.performed as Period) + 270 days and
 			end of (TotalKnee.performed as Period) + 365 days
 
@@ -138,7 +138,7 @@ define "VR12 Oblique Total Assessment Scores":
 		with ( [Observation: "VR-12 Physical component summary (PCS) score - oblique method T-score"] VR12PhysicalAssessment
 			where (VR12PhysicalAssessment.status = 'final' or VR12PhysicalAssessment.status = 'amended' or VR12PhysicalAssessment.status = 'corrected')
 					and VR12PhysicalAssessment.value is not null ) VR12PhysicalScore
-			such that start of (VR12MentalScore.effective as Period) same day as start of (VR12PhysicalScore.effective as Period)
+			such that FHIRHelpers.ToDateTime(VR12MentalScore.issued) same day as FHIRHelpers.ToDateTime(VR12PhysicalScore.issued)
 
 define "VR12 Orthogonal Total Assessment Scores":
 	( [Observation: "VR-12 Mental component summary (MCS) score - orthogonal method T-score"] VR12MentalAssessment
@@ -147,7 +147,7 @@ define "VR12 Orthogonal Total Assessment Scores":
 		with ( [Observation: "VR-12 Physical component summary (PCS) score - orthogonal method T-score"] VR12PhysicalAssessment
 			where (VR12PhysicalAssessment.status = 'final' or VR12PhysicalAssessment.status = 'amended' or VR12PhysicalAssessment.status = 'corrected')
 					and VR12PhysicalAssessment.value is not null ) VR12PhysicalScore
-			such that start of (VR12MentalScore.effective as Period) same day as start of (VR12PhysicalScore.effective as Period)
+			such that FHIRHelpers.ToDateTime(VR12MentalScore.issued) same day as FHIRHelpers.ToDateTime(VR12PhysicalScore.issued)
 
 define "Initial Population":
 	exists ( "Total Knee Arthroplasty Procedure" )
@@ -157,27 +157,27 @@ define "Initial Population":
 define "Assessed Initial and Follow up VR12 Orthogonal with TKA":
 	"Total Knee Arthroplasty Procedure" TotalKnee
 		with "VR12 Orthogonal Total Assessment Scores" InitialKneeAssessmentOrthogonal
-			such that start of (InitialKneeAssessmentOrthogonal.effective as Period) 90 days or less on or before start of (TotalKnee.performed as Period)
+			such that FHIRHelpers.ToDateTime(InitialKneeAssessmentOrthogonal.issued) 90 days or less on or before start of (TotalKnee.performed as Period)
 		with "VR12 Orthogonal Total Assessment Scores" FollowupKneeAssessmentOrthogonal
-			such that start of (FollowupKneeAssessmentOrthogonal.effective as Period) between
+			such that FHIRHelpers.ToDateTime(FollowupKneeAssessmentOrthogonal.issued) between
 			end of (TotalKnee.performed as Period) + 270 days and
 			end of (TotalKnee.performed as Period) + 365 days
 
 define "Assessed Initial and Follow up PROMIS10 with TKA":
 	"Total Knee Arthroplasty Procedure" TotalKnee
 		with "PROMIS10 Total Assessment Scores" InitialKneeAssessmentPROMIS10
-			such that start of (InitialKneeAssessmentPROMIS10.effective as Period) 90 days or less on or before start of (TotalKnee.performed as Period)
+			such that FHIRHelpers.ToDateTime(InitialKneeAssessmentPROMIS10.issued) 90 days or less on or before start of (TotalKnee.performed as Period)
 		with "PROMIS10 Total Assessment Scores" FollowupKneeAssessmentPROMIS10
-			such that start of (FollowupKneeAssessmentPROMIS10.effective as Period) between
+			such that FHIRHelpers.ToDateTime(FollowupKneeAssessmentPROMIS10.issued) between
 			end of (TotalKnee.performed as Period) + 270 days and
 			end of (TotalKnee.performed as Period) + 365 days
 
 define "Assessed Initial and Follow up VR12 Oblique with TKA":
 	"Total Knee Arthroplasty Procedure" TotalKnee
 		with "VR12 Oblique Total Assessment Scores" InitialKneeAssessmentOblique
-			such that start of (InitialKneeAssessmentOblique.effective as Period) 90 days or less on or before start of (TotalKnee.performed as Period)
+			such that FHIRHelpers.ToDateTime(InitialKneeAssessmentOblique.issued) 90 days or less on or before start of (TotalKnee.performed as Period)
 		with "VR12 Oblique Total Assessment Scores" FollowupKneeAssessmentOblique
-			such that start of (FollowupKneeAssessmentOblique.effective as Period) between
+			such that FHIRHelpers.ToDateTime(FollowupKneeAssessmentOblique.issued) between
 			end of (TotalKnee.performed as Period) + 270 days and
 			end of (TotalKnee.performed as Period) + 365 days
 
