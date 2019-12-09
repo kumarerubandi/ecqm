@@ -47,8 +47,9 @@ define "Qualifying Encounters":
 		            and ValidEncounter.period during "Measurement Period"
 
 define "Congenital Absence of Cervix":
-	[Condition: "Congenital absence of cervix (disorder)"] NoCervixBirth
-		where NoCervixBirth.clinicalStatus.coding[0].code='active'
+	[Condition] NoCervixBirth
+		where FHIRHelpers.ToConcept(NoCervixBirth.code).codes[0] ~ "Congenital absence of cervix (disorder)"
+			and NoCervixBirth.clinicalStatus.coding[0].code='active'
 			and Interval[FHIRHelpers.ToDateTime(NoCervixBirth.onset),FHIRHelpers.ToDateTime(NoCervixBirth.abatement)]  starts before end of "Measurement Period"
 
 define "Pap Test with Results":
