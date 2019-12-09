@@ -115,8 +115,8 @@ define function "CumulativeDays"(Intervals List<Interval<DateTime>> ):
 	)
 
 define function "EncounterDiagnosis"(ValidEncounter Encounter):
-	exists(singleton from (ValidEncounter.diagnosis EncounterDiagnosis
-				where exists(singleton from (EncounterDiagnosis.condition c where c.reference.value='Condition/'+("GetCondition").id.value))
+	exists(singleton from (ValidEncounter.diagnosis ED
+				where exists(ED.condition c where c.reference.value='Condition/'+("GetCondition").id.value)
 			)
 	)
 
