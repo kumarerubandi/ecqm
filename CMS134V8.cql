@@ -92,9 +92,10 @@ define "Has Hospice":
 
             exists ( [Encounter: "Encounter Inpatient"] DischargeHospice
             		where (DischargeHospice.status='in-progress' or DischargeHospice.status='finished')
-            		    and (( FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to home for hospice care (procedure)"
-            				or FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition) in "Discharge to healthcare facility for hospice care (procedure)")
-            		        )
+            		    and (
+			        FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition).codes[0] ~ "Discharge to home for hospice care (procedure)"
+					    or FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition).codes[0] ~ "Discharge to healthcare facility for hospice care (procedure)"
+			    )
             			and DischargeHospice.period ends during "Measurement Period"
                 )
             	or exists ( [ServiceRequest: "Hospice care ambulatory"] HospiceOrder
@@ -104,8 +105,3 @@ define "Has Hospice":
             	or exists ( [Procedure: "Hospice care ambulatory"] HospicePerformed
             			where (HospicePerformed.performed as Period) overlaps "Measurement Period"
             	)
-            	
-
-	
-		
-

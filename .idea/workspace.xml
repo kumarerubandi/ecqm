@@ -2,12 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dbc261d-3ff9-4e9c-97b5-866167254321" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Libraries/library-CMS139v8.json" afterPath="$PROJECT_DIR$/Libraries/library-CMS139v8.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Libraries/library-CMS22v8.json" afterPath="$PROJECT_DIR$/Libraries/library-CMS22v8.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Libraries/library-CMS2v9.json" afterPath="$PROJECT_DIR$/Libraries/library-CMS2v9.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Libraries/library-CMS56v8.json" afterPath="$PROJECT_DIR$/Libraries/library-CMS56v8.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Libraries/library-CMS66v8.json" afterPath="$PROJECT_DIR$/Libraries/library-CMS66v8.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Libraries/library-CMS69v8.json" afterPath="$PROJECT_DIR$/Libraries/library-CMS69v8.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS117V8.cql" afterPath="$PROJECT_DIR$/CMS117V8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS122v8.cql" afterPath="$PROJECT_DIR$/CMS122v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS124v8.cql" afterPath="$PROJECT_DIR$/CMS124v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS125v8.cql" afterPath="$PROJECT_DIR$/CMS125v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS127v8.cql" afterPath="$PROJECT_DIR$/CMS127v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS128v8.cql" afterPath="$PROJECT_DIR$/CMS128v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS130v8.cql" afterPath="$PROJECT_DIR$/CMS130v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS131v8.cql" afterPath="$PROJECT_DIR$/CMS131v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS134V8.cql" afterPath="$PROJECT_DIR$/CMS134V8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS136V9.cql" afterPath="$PROJECT_DIR$/CMS136V9.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS139v8.cql" afterPath="$PROJECT_DIR$/CMS139v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS154v8.cql" afterPath="$PROJECT_DIR$/CMS154v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS155v8.cql" afterPath="$PROJECT_DIR$/CMS155v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS156V8.cql" afterPath="$PROJECT_DIR$/CMS156V8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS165v8.cql" afterPath="$PROJECT_DIR$/CMS165v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS56v8.cql" afterPath="$PROJECT_DIR$/CMS56v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS66v8.cql" afterPath="$PROJECT_DIR$/CMS66v8.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS74v9.cql" afterPath="$PROJECT_DIR$/CMS74v9.cql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMS75v8.cql" afterPath="$PROJECT_DIR$/CMS75v8.cql" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,7 +33,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="scratch_15.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scratch_15.xml" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_15.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -29,11 +43,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="CMS128v8.cql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CMS128v8.cql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="57" lean-forward="false" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>g</find>
       <find>getc</find>
       <find>getco</find>
       <find>getcon</find>
@@ -63,6 +86,7 @@
       <find>FallsScreen</find>
       <find>effective</find>
       <find>effective as Period</find>
+      <find>define &quot;Has Hospice&quot;:</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -75,6 +99,9 @@
       <replace>Encounter</replace>
       <replace>Procedure</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,7 +115,6 @@
         <option value="$PROJECT_DIR$/CMS74v9.cql" />
         <option value="$PROJECT_DIR$/CMS50v8.cql" />
         <option value="$PROJECT_DIR$/CMS127v8.cql" />
-        <option value="$PROJECT_DIR$/CMS128v8.cql" />
         <option value="$PROJECT_DIR$/CMS133v8.cql" />
         <option value="$PROJECT_DIR$/CMS143v8.cql" />
         <option value="$PROJECT_DIR$/CMS349v2.cql" />
@@ -122,6 +148,7 @@
         <option value="$PROJECT_DIR$/Libraries/library-CMS149v8.json" />
         <option value="$PROJECT_DIR$/Libraries/library-CMS147v9.json" />
         <option value="$PROJECT_DIR$/Libraries/library-CMS139v8.json" />
+        <option value="$PROJECT_DIR$/CMS128v8.cql" />
       </list>
     </option>
   </component>
@@ -146,6 +173,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -158,24 +186,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ecqm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ecqm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -286,6 +299,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16012317" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Graph Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -295,7 +309,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -415,13 +428,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMS153.cql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2414">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/CMS153.cql" />
     <entry file="file://$PROJECT_DIR$/CMS177v8.cql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -478,13 +485,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AdvancedIllnessandFrailtyExclusionECQM-4.0.000.cql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="51" column="29" lean-forward="false" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/AdvancedIllnessandFrailtyExclusionECQM-4.0.000.cql" />
     <entry file="file://$PROJECT_DIR$/CMS125v8.cql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -517,13 +518,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="131" column="43" lean-forward="false" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMS128v8.cql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="94" column="108" lean-forward="false" selection-start-line="94" selection-start-column="100" selection-end-line="94" selection-end-column="108" />
         </state>
       </provider>
     </entry>
@@ -581,7 +575,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="423">
           <caret line="159" column="14521" lean-forward="false" selection-start-line="159" selection-start-column="14521" selection-end-line="159" selection-end-column="14521" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -589,7 +582,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
           <caret line="284" column="19833" lean-forward="false" selection-start-line="284" selection-start-column="19833" selection-end-line="284" selection-end-column="19833" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -597,7 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="423">
           <caret line="284" column="19157" lean-forward="false" selection-start-line="284" selection-start-column="19157" selection-end-line="284" selection-end-column="19157" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -605,7 +596,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
           <caret line="190" column="21557" lean-forward="false" selection-start-line="190" selection-start-column="21557" selection-end-line="190" selection-end-column="21557" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -613,7 +603,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="367">
           <caret line="196" column="6803" lean-forward="false" selection-start-line="196" selection-start-column="6803" selection-end-line="196" selection-end-column="6803" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -621,7 +610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="619">
           <caret line="57" column="9197" lean-forward="false" selection-start-line="57" selection-start-column="9197" selection-end-line="57" selection-end-column="9197" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -629,7 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="45" column="6" lean-forward="true" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -637,7 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="160" column="7" lean-forward="true" selection-start-line="160" selection-start-column="7" selection-end-line="160" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -645,7 +631,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="79">
           <caret line="159" column="9" lean-forward="true" selection-start-line="159" selection-start-column="9" selection-end-line="159" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -653,7 +638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
           <caret line="319" column="7" lean-forward="true" selection-start-line="319" selection-start-column="7" selection-end-line="319" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -661,6 +645,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMS128v8.cql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="57" lean-forward="false" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
           <folding />
         </state>
       </provider>
