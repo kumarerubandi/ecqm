@@ -5,9 +5,9 @@ using FHIR version '4.0.0'
 include FHIRHelpers version '4.0.0' called FHIRHelpers
 
 
-//include MATGlobalCommonFunctions version '4.0.000' called Global
-//include Hospice version '2.0.000' called Hospice
-//include AdvancedIllnessandFrailtyExclusionECQM version '4.0.000' called FrailtyLTI
+include MATGlobalCommonFunctions version '4.0.000' called Global
+include Hospice version '2.0.000' called Hospice
+include AdvancedIllnessandFrailtyExclusionECQM version '4.0.000' called FrailtyLTI
 
 codesystem "LOINC": 'urn:oid:2.16.840.1.113883.6.1'
 codesystem "SNOMEDCT": 'http://snomed.info/sct'
@@ -42,7 +42,7 @@ context Patient
 
 define "Retinal Exam in Measurement Period":
 	[Procedure: "Retinal or Dilated Eye Exam"] RetinalExam
-		where RetinalExam.performed as Period during "Measurement Period"
+		where (RetinalExam.performed as Period) during "Measurement Period"
 
 define "Denominator":
 	"Initial Population"
@@ -59,11 +59,11 @@ define "Qualifying Encounters":
 define "Retinal Exam in Measurement Period or Year Prior":
 	[Procedure: "Retinal or Dilated Eye Exam"] RetinalExam
 		where 
-		end of RetinalExam.performed as Period between start of "Measurement Period" - 1 year and 
+		end of (RetinalExam.performed as Period) between start of "Measurement Period" - 1 year and 
 		end of "Measurement Period"
 
 define "Denominator Exclusions":
-	exists (  AgeInYearsAt(start of "Measurement Period") >= 65
+	(AgeInYearsAt(start of "Measurement Period") >= 65
 				and FrailtyLTI."Has Spent More Than 90 Days in Long Term Care"
 	)
 		or FrailtyLTI."Advanced Illness and Frailty Exclusion Including Under Age 80"
@@ -83,57 +83,9 @@ define "Numerator":
 		)
 
 define "Initial Population":
-	exists (  AgeInYearsAt(start of "Measurement Period") >= 18 and AgeInYearsAt(start of "Measurement Period") < 75
-
-	)
+	 (AgeInYearsAt(start of "Measurement Period") >= 18 and AgeInYearsAt(start of "Measurement Period") < 75)
 		and exists ( "Qualifying Encounters" )
 		and exists ( [Condition: "Diabetes"] Diabetes
 				where Diabetes.onset as Period overlaps "Measurement Period"
 		)
-define "Has Hospice":
 
-            exists ( [Encounter: "Encounter Inpatient"] DischargeHospice
-            		where (DischargeHospice.status='in-progress' or DischargeHospice.status='finished')
-            		    and (
-			        FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition).codes[0] ~ "Discharge to home for hospice care (procedure)"
-					    or FHIRHelpers.ToConcept(DischargeHospice.hospitalization.dischargeDisposition).codes[0] ~ "Discharge to healthcare facility for hospice care (procedure)"
-			    )
-            			and DischargeHospice.period ends during "Measurement Period"
-                )
-            	or exists ( [ServiceRequest: "Hospice care ambulatory"] HospiceOrder
-            			where HospiceOrder.intent= 'order'
-				and FHIRHelpers.ToDateTime(HospiceOrder.authoredOn) during "Measurement Period"
-            	)
-            	or exists ( [Procedure: "Hospice care ambulatory"] HospicePerformed
-            			where (HospicePerformed.performed as Period) overlaps "Measurement Period"
-            	)
-            	
-define "Advanced Illness and Frailty Exclusion Including Under Age 80":
-	//If the measure does NOT include populations age 80 and older, then use this logic:
-	exists (  AgeInYearsAt(start of "Measurement Period") >= 65
-
-				and "Has Criteria Indicating Frailty"
-				and ( Count("Outpatient Encounters with Advanced Illness")>= 2
-						or exists ( "Inpatient Encounter with Advanced Illness" )
-						or exists "Dementia Medications In Year Before or During Measurement Period"
-				)
-	)
-	
-		
-define "Has Spent More Than 90 Days in Long Term Care":
-	"Days Spent in Long Term Care During Measurement Period" > 90
-
-define "Days Spent in Long Term Care During Measurement Period":
-	"CumulativeDays"("Long Term Care Periods During Measurement Period")
-
-define function "CumulativeDays"(Intervals List<Interval<DateTime>> ):
-	Sum((collapse Intervals)CollapsedInterval
-			return all duration in days of CollapsedInterval
-	)
-
-define "Long Term Care Periods During Measurement Period":
-	( [Encounter: "Care Services in Long-Term Residential Facility"]
-		union [Encounter: "Nursing Facility Visit"] ) LongTermFacilityEncounter
-		where LongTermFacilityEncounter.period overlaps "Measurement Period"
-		return LongTermFacilityEncounter.period
-			intersect "Measurement Period"
