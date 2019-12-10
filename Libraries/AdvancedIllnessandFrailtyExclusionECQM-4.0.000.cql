@@ -1,4 +1,4 @@
-library AdvancedIllnessandFrailtyExclusion_FHIR4 version '4.0.000'
+library AdvancedIllnessandFrailtyExclusionECQM version '4.0.000'
 
 using FHIR version '4.0.0'
 
@@ -70,10 +70,10 @@ define "Has Criteria Indicating Frailty":
 	exists ( [DeviceRequest: "Frailty Device"] FrailtyDeviceOrder
 			where FHIRHelpers.ToDateTime(FrailtyDeviceOrder.authoredOn) during day of "Measurement Period"
 	)
-		or exists ( [DeviceUseStatement: "Frailty Device"] FrailtyDeviceUse
-				where FrailtyDeviceUse.timing as Period overlaps "Measurement Period"
-                    or FHIRHelpers.ToDateTime(FrailtyDeviceUse.timing) during day of "Measurement Period"
-		)
+		//or exists ( [DeviceUseStatement: "Frailty Device"] FrailtyDeviceUse
+			//	where FrailtyDeviceUse.timing as Period overlaps "Measurement Period"
+                   // or FHIRHelpers.ToDateTime(FrailtyDeviceUse.timing) during day of "Measurement Period"
+		//)
 		or exists ( [Condition: "Frailty Diagnosis"] FrailtyDiagnosis
 				where FrailtyDiagnosis.onset as Period overlaps "Measurement Period"
                     or FHIRHelpers.ToDateTime(FrailtyDiagnosis.onset) during day of "Measurement Period"
