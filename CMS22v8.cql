@@ -47,10 +47,10 @@ define "Qualifying Encounters During Measurement Period":
 
 define "Qualifying Encounters with Blood Pressure Screening Results":
 	"Qualifying Encounters During Measurement Period" QualifyingEncounter
-		with [Observation: "Diastolic blood pressure"] DiastolicBP
+		with ([Observation]O where FHIRHelpers.ToConcept(O.code).codes[0] ~ "Diastolic blood pressure") DiastolicBP
 			such that (DiastolicBP.effective as Period) starts during QualifyingEncounter.period
 				and DiastolicBP.value is not null
-		with [Observation: "Systolic blood pressure"] SystolicBP
+		with ([Observation]O where FHIRHelpers.ToConcept(O.code).codes[0] ~  "Systolic blood pressure") SystolicBP
 			such that (SystolicBP.effective as Period) starts during QualifyingEncounter.period
 				and SystolicBP.value is not null
 		sort by start of period
@@ -59,7 +59,7 @@ define "Most Recent Blood Pressure Screening Encounter":
 	Last("Qualifying Encounters with Blood Pressure Screening Results")
 
 define "Most Recent Diastolic Reading During Most Recent Blood Pressure Screening Encounter":
-	Last([Observation: "Diastolic blood pressure"] DiastolicBP
+	Last(([Observation]O where FHIRHelpers.ToConcept(O.code).codes[0] ~  "Diastolic blood pressure") DiastolicBP
 			with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
 				such that (DiastolicBP.effective as Period) during LastBPEncounter.period
 					and DiastolicBP.value is not null
@@ -67,7 +67,7 @@ define "Most Recent Diastolic Reading During Most Recent Blood Pressure Screenin
 	)
 
 define "Most Recent Systolic Reading During Most Recent Blood Pressure Screening Encounter":
-	Last([Observation: "Systolic blood pressure"] SystolicBP
+	Last(([Observation]O where FHIRHelpers.ToConcept(O.code).codes[0] ~  "Systolic blood pressure") SystolicBP
 			with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
 				such that (SystolicBP.effective as Period) during LastBPEncounter.period
 					and SystolicBP.value is not null
@@ -75,8 +75,8 @@ define "Most Recent Systolic Reading During Most Recent Blood Pressure Screening
 	)
 
 define "No Blood Pressure Screen":
-	([Observation: "Systolic blood pressure"]SystolicBP where SystolicBP.status = 'cancelled' or SystolicBP.status = 'entered-in-error')
-		union ([Observation: "Diastolic blood pressure"]DiastolicBP where DiastolicBP.status = 'cancelled' or DiastolicBP.status = 'entered-in-error')
+	(([Observation]O where FHIRHelpers.ToConcept(O.code).codes[0] ~  "Systolic blood pressure")SystolicBP where SystolicBP.status = 'cancelled' or SystolicBP.status = 'entered-in-error')
+		union (([Observation]O where FHIRHelpers.ToConcept(O.code).codes[0] ~  "Diastolic blood pressure")DiastolicBP where DiastolicBP.status = 'cancelled' or DiastolicBP.status = 'entered-in-error')
 
 define "No Blood Pressure Screen Due to Medical Reason or Patient Refusal":
 	"No Blood Pressure Screen" NoBPScreen
@@ -84,7 +84,7 @@ define "No Blood Pressure Screen Due to Medical Reason or Patient Refusal":
 			such that ( NoBPScreen.dataAbsentReason in "Medical or Other reason not done"
 					or NoBPScreen.dataAbsentReason in "Patient Reason refused"
 			)
-				and FHIRHelpers.ToDateTime(FallsScreen.issued) same day as start of QualifyingEncounter.period
+				and FHIRHelpers.ToDateTime(NoBPScreen.issued) same day as start of QualifyingEncounter.period
 
 define "Patients Age 18 Years and Older at Start of Measurement Period":
 	AgeInYearsAt(start of "Measurement Period")>= 18
@@ -102,7 +102,7 @@ define "Prehypertensive Blood Pressure at Most Recent Screening Encounter":
 define "Antihypertensive Medication Not Ordered Due to Patient Refusal":
 	( [MedicationRequest: "Anti-Hypertensive Pharmacologic Therapy"] NoAntihypertensives
 			with "Qualifying Encounters During Measurement Period" QualifyingEncounter
-				such that NoAntihypertensives.intent!='order'  
+				such that NoAntihypertensives.intent!='order'
 					and FHIRHelpers.ToBoolean(NoAntihypertensives.doNotPerform) =true
 					and NoAntihypertensives.reasonCode in "Patient Reason refused"
 					and FHIRHelpers.ToDateTime(NoAntihypertensives.authoredOn) same day as start of QualifyingEncounter.period
@@ -182,7 +182,7 @@ define "Initial Population":
 		and exists ( "Qualifying Encounters During Measurement Period" )
 
 define "Last Diastolic One Year Prior to Encounter":
-	Last([Observation: "Diastolic blood pressure"] DiastolicBP
+	Last(([Observation]O where FHIRHelpers.ToConcept(O.code).codes[0] ~   "Diastolic blood pressure") DiastolicBP
 			with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
 				such that (DiastolicBP.effective as Period) starts 1 year or less before start LastBPEncounter.period
 			sort by start of (effective as Period)
@@ -193,7 +193,7 @@ define "Last Diastolic One Year Prior to Encounter High":
 		where FHIRHelpers.ToInteger(LastDiastolic.value) >= 90 'mm[Hg]'
 
 define "Last Systolic One Year Prior to Encounter":
-	Last([Observation: "Systolic blood pressure"] SystolicBP
+	Last(([Observation]O where FHIRHelpers.ToConcept(O.code).codes[0] ~ "Systolic blood pressure") SystolicBP
 			with "Most Recent Blood Pressure Screening Encounter" LastBPEncounter
 				such that (SystolicBP.effective as Period) starts 1 year or less before start LastBPEncounter.period
 			sort by start of (effective as Period)

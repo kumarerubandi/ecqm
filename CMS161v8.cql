@@ -50,23 +50,19 @@ define "Major Depressive Disorder Encounter":
 		union [Encounter: "Psych Visit - Psychotherapy"]
 		union [Encounter: "Psychoanalysis"]
 		union [Encounter: "Telehealth Services"] ) ValidEncounter
-		where (ValidEncounter.status='in-progress' or ValidEncounter.status='finished')
-		    and "EncounterDiagnosis"(ValidEncounter)
+		with ([Condition:"Major Depressive Disorder-Active"]C where C.clinicalStatus.coding[0].code='active')Condition
+		such that (ValidEncounter.status='in-progress' or ValidEncounter.status='finished')
+		    and exists (
+                ValidEncounter.diagnosis.condition Condition
+                    where EndsWith(Condition.reference, Condition.id)
+            )
 
 define "Numerator":
 	"New or Recurrent Major Depressive Disorder Encounter" NewOrRecurrentMDDEncounter
-		with [Procedure: "Suicide risk assessment (procedure)"] SuicideRiskAssessment
+		with ([Procedure]O where FHIRHelpers.ToConcept(O.code).codes[0] ~ "Suicide risk assessment (procedure)") SuicideRiskAssessment
 			such that (SuicideRiskAssessment.performed as Period) during NewOrRecurrentMDDEncounter.period
 
 define "Initial Population":
 	"New or Recurrent Major Depressive Disorder Encounter" NewOrRecurrentMDDEncounter
 		where AgeInYearsAt(start of "Measurement Period")>= 17
 
-define function "EncounterDiagnosis"(ValidEncounter Encounter):
-	exists(singleton from (ValidEncounter.diagnosis EncounterDiagnosis
-				where exists(singleton from (EncounterDiagnosis.condition c where c.reference.value='Condition/'+("GetCondition").id.value))
-			)
-	)
-
-define "GetCondition":
-	singleton from ([Condition:"Major Depressive Disorder-Active"]C where C.clinicalStatus.coding[0].code='active')

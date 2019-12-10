@@ -124,10 +124,10 @@ define "Stratification 2":
 				and "Index Depression Assessment" is not null
 
 define "Initial Population":
-	exists ( "Index Depression Assessment" IndexAssessment
+	"Index Depression Assessment" IndexAssessment
 				where AgeInYearsAt(FHIRHelpers.ToDateTime(IndexAssessment.issued))>= 12
-					and "Index Depression Assessment" is not null
-	)
+					//and "Index Depression Assessment" is not null
+
 
 define function "ToDate"(Value DateTime ):
 	DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezone from Value)

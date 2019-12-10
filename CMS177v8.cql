@@ -45,25 +45,22 @@ define "Major Depressive Disorder Encounter":
 		union [Encounter: "Psychoanalysis"]
 		union [Encounter: "Group Psychotherapy"]
 		union [Encounter: "Telehealth Services"] ) ValidEncounter
-		where "EncounterDiagnosis"(ValidEncounter)
+		where exists (
+                ValidEncounter.diagnosis.condition Condition
+                    where EndsWith(Condition.reference, "GetCondition".id)
+            )
 			and (ValidEncounter.status='in-progress' or ValidEncounter.status='finished')
 		    and ValidEncounter.period during "Measurement Period"
 
 define "Numerator":
 	"Major Depressive Disorder Encounter" MDDEncounter
-		with [Procedure: "Suicide risk assessment (procedure)"] SuicideRiskAssessment
+		with ([Procedure]O where FHIRHelpers.ToConcept(O.code).codes[0] ~ "Suicide risk assessment (procedure)") SuicideRiskAssessment
 			such that (SuicideRiskAssessment.performed as Period) during MDDEncounter.period
 
 define "Initial Population":
 	"Major Depressive Disorder Encounter" MDDEncounter
 		where AgeInYearsAt(start of "Measurement Period")>= 6
 				and AgeInYearsAt(start of "Measurement Period")< 17
-
-define function "EncounterDiagnosis"(ValidEncounter Encounter):
-	exists(singleton from (ValidEncounter.diagnosis EncounterDiagnosis
-				where exists(singleton from (EncounterDiagnosis.condition c where c.reference.value='Condition/'+("GetCondition").id.value))
-			)
-	)
 
 define "GetCondition":
 	singleton from ([Condition:"Major Depressive Disorder-Active"]C where C.clinicalStatus.coding[0].code='active')

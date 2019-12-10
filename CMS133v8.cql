@@ -92,7 +92,7 @@ define "Cataract Surgery Between January and September of Measurement Period":
 
 define "Numerator":
 	"Cataract Surgery Between January and September of Measurement Period" CataractSurgeryPerformed
-		with [Observation: "Best corrected visual acuity (observable entity)"] VisualAcuityExamPerformed
+		with ([Observation]O where FHIRHelpers.ToConcept(O.code).codes[0] ~ "Best corrected visual acuity (observable entity)") VisualAcuityExamPerformed
 			such that (VisualAcuityExamPerformed.effective as Period) starts 90 days or less after day of
 			end of (CataractSurgeryPerformed.performed as Period)
 				and VisualAcuityExamPerformed.value in "Visual Acuity 20/40 or Better"
