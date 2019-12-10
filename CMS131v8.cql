@@ -64,10 +64,10 @@ define "Retinal Exam in Measurement Period or Year Prior":
 
 define "Denominator Exclusions":
 	(AgeInYearsAt(start of "Measurement Period") >= 65
-				and FrailtyLTI."Has Spent More Than 90 Days in Long Term Care"
+				and FrailtyLTI.Has Spent More Than 90 Days in Long Term Care
 	)
-		or FrailtyLTI."Advanced Illness and Frailty Exclusion Including Under Age 80"
-		or Hospice."Has Hospice"
+		or FrailtyLTI.Advanced Illness and Frailty Exclusion Including Under Age 80
+		or Hospice.Has Hospice
 
 define "Diabetic Retinopathy Overlapping Measurement Period":
 	exists ( [Condition: "Diabetic Retinopathy"] Retinopathy
