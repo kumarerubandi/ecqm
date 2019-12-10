@@ -3,9 +3,6 @@ library DiabetesEyeExam version '8.4.000'
 using FHIR version '4.0.0'
 
 include FHIRHelpers version '4.0.0' called FHIRHelpers
-
-
-include MATGlobalCommonFunctions version '4.0.000' called Global
 include Hospice version '2.0.000' called Hospice
 include AdvancedIllnessandFrailtyExclusionECQM version '4.0.000' called FrailtyLTI
 
